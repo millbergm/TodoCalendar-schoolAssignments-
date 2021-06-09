@@ -7,23 +7,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo Calendar</title>
     <link rel="stylesheet" href="./wwwroot/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./wwwroot/css/base.css">
+
     <script defer src="./wwwroot/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/80fd7dc215.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <header></header>
-    <div class="contaner">
-        <div class="row">
-            <div class="col-12 col-md-2">
-                <div class="day"></div>
-                <div id="todocontaner"></div>
+    <header class="p-1 bg-primary text-center fs-1">
+        <span class="text-white">
+            TODO-Kalender
+        </span>
+    </header>
+    <div class="row bg-secondary text-white margin-right-0">
+        <div class="col-12 col-sm-3 col-md-2 padding-right-0">
+            <div class="day bg-info p-2 mb-2 text-center">
+                <P>DAGENS HÖGTID</P>
+                <p>DAGENS DATUM</p>
             </div>
-            <div class="col-md-10">
 
+            <div id="todocontainer" class="bg-success p-2">
+                <div class="d-flex flex-column todoitem">
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <div class="fs-6">
+                            <p>TODO-Titel</p>
+                        </div>
+                        <!-- <div style="height: 1rem; width: auto;">                             -->
+                            <div class="btn-group btn-group-sm " role="group" aria-label="TODO Options">
+                                <button type="button" class="btn btn-outline-light btn-sm"><i class="fas fa-check" style="font-size: 10px;"></i></button>
+                                <button type="button" class="btn btn-outline-light btn-sm"><i class="fas fa-edit" style="font-size: 10px;"></i></button>
+                                <button type="button" class="btn btn-outline-light btn-sm"><i class="fas fa-trash-alt" style="font-size: 10px;"></i></button>
+                            </div>
+                        <!-- </div> -->
+                    </div>
+                    <div class="">
+                        <p>Information om din TODO</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-none d-sm-block col-sm-9 col-md-10 bg-success padding-right-0">
+            <div class="row margin-right-0">
+                <div class="col-12 padding-0">
+                    <div class="d-flex justify-content-between align-items-center bg-primary fs-5 p-2 text-white">
+                        <button class="btn btn-primary fs-3">
+                            <i class="fas fa-angle-left"></i>
+                        </button>
+                        <span>MÅNAD</span>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-angle-right fs-3"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row margin-right-0">
+                <div class="col-12 padding-0">
+                    
+                    <p class="bg-secondary">Dagar</p>
+                </div>
             </div>
         </div>
     </div>
-    <button class="add-todo"></button>
+    <!-- <button class="btn btn-primary circle add-todo"> -->
+    <button class="btn btn-primary circle add-todo">
+        <i class="fas fa-plus-circle"></i>
+    </button>
 </body>
 
 </html>
