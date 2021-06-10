@@ -32,6 +32,13 @@
   border: solid 1px black;
   min-height: 4rem;
 }
+.todo-nr {
+  color: white;
+}
+.red,
+.day-red-day {
+  color: red;
+}
 
 .temp {
   display: none;
