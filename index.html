@@ -28,19 +28,39 @@
             </div>
             <div id="todocontainer" class="bg-success p-2">
                 <div class="d-flex flex-column todoitem">
-                    <div class="d-flex flex-column">
-                        <div class="fs-6">
-                            <p>TODO-Titel</p>
-                        </div>                        
-                        <div class="btn-group btn-group-sm" style="height: 1rem; align-items: center;" role="group" aria-label="TODO Options">
-                            <button type="button" class="btn btn-outline-light btn-sm" data-bs-toggle="button" autocomplete="off"><i class="fas fa-check"
-                                    style="font-size: 16px;"></i></button>
+                    <div class="d-flex flex-column">                        
+                        <div class="accordion fs-6" id="todoAccordion">
+                            <div class="accordion-item bg-success">
+                                <h2 class="accordion-header " id="headingOne">
+                                    <button class="accordion-button bg-success col" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        <p>TODO-Titel</p>
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse"
+                                    aria-labelledby="headingOne" data-bs-parent="#todoAccordion">
+                                    <div class="accordion-body bg-secondary d-flex flex-column">
+                                        <div>
+                                            <p>Todo-Info</p>
+                                        </div>
+                                        <div class="d-flex flex-row justify-content-between">
+                                            <div><p>StartDatum</p></div>
+                                            <div><p>SlutDatum</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-group btn-group-sm todobuttons" role="group"
+                            aria-label="TODO Options">
+                            <button type="button" class="btn btn-outline-light btn-sm" data-bs-toggle="button"
+                                autocomplete="off"><i class="fas fa-check" style="font-size: 16px;"></i></button>
                             <button type="button" class="btn btn-outline-light btn-sm"><i class="fas fa-edit"
                                     style="font-size: 16px;"></i></button>
                             <button type="button" class="btn btn-outline-light btn-sm"><i class="fas fa-trash-alt"
                                     style="font-size: 16px;"></i></button>
-                        </div>                        
-                    </div>                    
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
