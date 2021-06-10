@@ -6,7 +6,7 @@ function setup() {
 }
 
 function setupCalender(year, month) {
-  getDaysInfoAsync(year, month, (responseText) => {
+  getDaysInfo(year, month, (responseText) => {
     const response = JSON.parse(responseText);
     const days = response.dagar;
     for (let index = 1; index < days[0]["dag i vecka"]; index++) {
@@ -63,7 +63,7 @@ function createEmtyDay() {
   calendarDays.append(emtyDay);
 }
 
-function getDaysInfoAsync(year, month, callback) {
+function getDaysInfo(year, month, callback) {
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.onreadystatechange = function () {
     if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
