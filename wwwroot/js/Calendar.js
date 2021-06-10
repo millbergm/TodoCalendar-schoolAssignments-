@@ -7,6 +7,11 @@ function setup() {
 
 function setupCalender(year, month) {
   getDaysInfo(year, month, (responseText) => {
+    const temp = document.querySelector(".daycontaner.temp").cloneNode(true);
+    const calendarDays = document.getElementById("calendar-Days");
+    calendarDays.innerHTML = "";
+    calendarDays.append(temp);
+
     const response = JSON.parse(responseText);
     const days = response.dagar;
     for (let index = 1; index < days[0]["dag i vecka"]; index++) {
