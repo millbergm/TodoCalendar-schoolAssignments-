@@ -29,14 +29,14 @@
 }
 
 .daycontaner {
+  font-size: 0.8rem;
   border: solid 1px black;
   min-height: 4rem;
+  overflow: hidden;
 }
-.todo-nr {
-  color: white;
-}
-.red,
-.day-red-day {
+
+.red .day-Nr,
+.red .day-red-day {
   color: red;
 }
 
