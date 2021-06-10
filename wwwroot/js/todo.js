@@ -22,6 +22,16 @@ function deleteTodoByIndex(i) {
     allTodos.splice(i, 1);
 }
 
+function changeStatusOfTodo(i) {
+    var todo = allTodos[i];
+    
+    if (todo.isDone == false) {
+        todo.isDone = true;
+    } else {
+        todo.isDone = false;
+    }
+}
+
 /**
  * 
  * @param {Date} date 
