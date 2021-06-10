@@ -72,7 +72,7 @@ function getDaysInfo(year, month, callback) {
   xmlHttp.open(
     "GET",
     `https://sholiday.faboul.se/dagar/v2.1/${year}/${month}`,
-    true
-  ); // true for asynchronous
+    true // true for asynchronous
+  );
   xmlHttp.send(null);
 }
