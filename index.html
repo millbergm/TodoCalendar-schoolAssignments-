@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./wwwroot/css/bootstrap.min.css">
     <link rel="stylesheet" href="./wwwroot/css/base.css">
 
+    <script defer src="wwwroot/js/welcome-clock.js"></script>
     <script defer src="./wwwroot/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/80fd7dc215.js" crossorigin="anonymous"></script>
 </head>
@@ -22,8 +23,8 @@
     <div class="row bg-secondary text-white margin-right-0">
         <div class="col-12 col-sm-3 col-md-2 padding-right-0">
             <div class="day bg-info p-2 mb-2 text-center">
-                <P>DAGENS HÖGTID</P>
-                <p>DAGENS DATUM</p>
+                <p id="welcome-time">TID</p>
+                <p id="welcome-date" class="text-capitalize">DAGENS DATUM</p>
             </div>
 
             <div id="todocontainer" class="bg-success p-2">
