@@ -4,8 +4,9 @@ class TodoItem {
      * @param {Date} startDate
      * @param {Date} stopDate
      */
-    constructor(title, startDate, stopDate) {
+    constructor(title, info, startDate, stopDate) {
         this.title = title;
+        this.info = info;
         this.startDate = startDate;
         this.stopDate = stopDate;
         this.isDone = false;
@@ -15,7 +16,7 @@ class TodoItem {
 var allTodos = new Array();
 
 function addNewTodo(TodoItem) {
-    allTodos.push(this.TodoItem);
+    allTodos.push(TodoItem);
 }
 
 function deleteTodoByIndex(i) {
