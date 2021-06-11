@@ -48,3 +48,8 @@
   flex: 0 0 auto;
   width: 14.28571428571429%;
 }
+
+.todobuttons{
+  height: auto; 
+  align-items: center;
+}
