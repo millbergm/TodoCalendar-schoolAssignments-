@@ -1,6 +1,4 @@
-window.addEventListener("DOMContentLoaded", setup);
-
-function setup() {
+function initCalender() {
   const currentDate = new Date();
   setupCalender(currentDate.getFullYear(), currentDate.getMonth() + 1);
 }
