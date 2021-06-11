@@ -1,161 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo Calendar</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
     <!-- <link rel="stylesheet" href="./wwwroot/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="./wwwroot/css/base.css">
+    <link rel="stylesheet" href="./wwwroot/css/base.css" />
 
     <script defer src="wwwroot/js/main.js"></script>
     <script defer src="wwwroot/js/welcome-clock.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-        crossorigin="anonymous"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
     <!-- <script defer src="./wwwroot/js/bootstrap.bundle.min.js"></script> -->
-    <script src="https://kit.fontawesome.com/80fd7dc215.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/80fd7dc215.js"
+      crossorigin="anonymous"
+    ></script>
     <script defer src="./wwwroot/js/welcome-clock.js"></script>
     <script defer src="./wwwroot/js/Calendar.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <header class="p-1 bg-primary text-center fs-1">
-        <span class="text-white">
-            TODO-Kalender
-        </span>
+      <span class="text-white"> TODO-Kalender </span>
     </header>
     <div class="row bg-secondary text-white margin-right-0">
-        <div class="col-12 col-sm-3 col-md-2 padding-right-0">
-            <div class="day bg-info p-2 mb-2 text-center">
-                <p id="welcome-time">TID</p>
-                <p id="welcome-date" class="text-capitalize">DAGENS DATUM</p>
-            </div>
-            <div id="todocontainer" class="bg-success p-2">
-                <div class="d-flex flex-column todoitem">
-                    <div class="d-flex flex-column">                        
-                        <div class="accordion fs-6" id="todoAccordion">
-                            <div class="accordion-item bg-success">
-                                <h2 class="accordion-header " id="headingOne">
-                                    <button class="accordion-button bg-success col" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                        <p>TODO-Titel</p>
-                                    </button>
-                                </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse"
-                                    aria-labelledby="headingOne" data-bs-parent="#todoAccordion">
-                                    <div class="accordion-body bg-secondary d-flex flex-column">
-                                        <div>
-                                            <p>Todo-Info</p>
-                                        </div>
-                                        <div class="d-flex flex-row justify-content-between">
-                                            <div><p>StartDatum</p></div>
-                                            <div><p>SlutDatum</p></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="btn-group btn-group-sm todobuttons" role="group"
-                            aria-label="TODO Options">
-                            <button type="button" class="btn btn-outline-light btn-sm" data-bs-toggle="button"
-                                autocomplete="off"><i class="fas fa-check" style="font-size: 16px;"></i></button>
-                            <button type="button" class="btn btn-outline-light btn-sm"><i class="fas fa-edit"
-                                    style="font-size: 16px;"></i></button>
-                            <button type="button" class="btn btn-outline-light btn-sm"><i class="fas fa-trash-alt"
-                                    style="font-size: 16px;"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Button trigger modal -->
-            <button class="btn btn-primary circle add-todo" data-bs-toggle="modal" data-bs-target="#newTodo">
-                <i class="fas fa-plus-circle"></i>
-            </button>
-            <!-- Modal -->
-            <div class="modal fade" id="newTodo" tabindex="-1" aria-labelledby="newTodoLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content bg-secondary">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="newTodoLabel">Skapa Ny ToDo</h5>
-                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="mb-3">
-                                    <label for="todoTitle" class="form-label">Titel</label>
-                                    <input type="text" class="form-control" id="todoTitle" required>
-                                    <div class="invalid-feedback">
-                                        Ange en titel för din ToDo.
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="todoInfo" class="form-label">Information</label>
-                                    <textarea class="form-control" id="todoInfo" rows="3"></textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="startDate" class="form-label">Startdatum</label>
-                                    <input type="date" class="form-control" id="startDate" required>
-                                    <div class="invalid-feedback">
-                                        Ett datum måste väljas.
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="stopDate" class="form-label">Slutdatum</label>
-                                    <input type="date" class="form-control" id="stopDate">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="col-12 col-sm-3 col-md-2 padding-right-0">
+        <div class="day bg-info p-2 mb-2 text-center">
+          <p id="welcome-time">TID</p>
+          <p id="welcome-date" class="text-capitalize">DAGENS DATUM</p>
         </div>
-        <div class="d-none d-sm-block col-sm-9 col-md-10 bg-success padding-right-0">
-            <div class="row margin-right-0">
-                <div class="col-12 padding-0">
-                    <div class="d-flex justify-content-between align-items-center bg-primary fs-5 p-2 text-white">
-                        <button class="btn btn-primary fs-3">
-                            <i class="fas fa-angle-left"></i>
+        <div id="todocontainer" class="bg-success p-2">
+          <div class="d-flex flex-column todoitem">
+            <div class="d-flex flex-column">
+              <div class="accordion fs-6" id="todoAccordion">
+                <div class="accordion-item bg-success">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button
+                      class="accordion-button bg-success col"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne"
+                      aria-expanded="false"
+                      aria-controls="collapseOne"
+                    >
+                      <p>TODO-Titel</p>
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseOne"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="headingOne"
+                    data-bs-parent="#todoAccordion"
+                  >
+                    <div class="accordion-body bg-secondary d-flex flex-column">
+                      <div>
+                        <p>Todo-Info</p>
+                      </div>
+                      <div class="d-flex flex-row justify-content-between">
+                        <div><p>StartDatum</p></div>
+                        <div><p>SlutDatum</p></div>
+                      </div>
+                      <div
+                        class="btn-group btn-group-sm todobuttons"
+                        role="group"
+                        aria-label="TODO Options"
+                      >
+                        <button
+                          type="button"
+                          class="btn btn-outline-light btn-sm"
+                          data-bs-toggle="button"
+                          autocomplete="off"
+                        >
+                          <i class="fas fa-check" style="font-size: 16px"></i>
                         </button>
-                        <span>MÅNAD</span>
-                        <button class="btn btn-primary">
-                            <i class="fas fa-angle-right fs-3"></i>
+                        <button
+                          type="button"
+                          class="btn btn-outline-light btn-sm"
+                        >
+                          <i class="fas fa-edit" style="font-size: 16px"></i>
                         </button>
+                        <button
+                          type="button"
+                          class="btn btn-outline-light btn-sm"
+                        >
+                          <i
+                            class="fas fa-trash-alt"
+                            style="font-size: 16px"
+                          ></i>
+                        </button>
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
-            <div class="row justify-content-center row-cols-7 margin-right-0 text-center">
-                <p class="col">Måndag</p>
-                <p class="col">Tisdag</p>
-                <p class="col">Onsdag</p>
-                <p class="col">Torsdag</p>
-                <p class="col">Fredag</p>
-                <p class="col">Lördag</p>
-                <p class="col">Söndag</p>
-            </div>
-            <div id="calendar-Days" class="row justify-content-center row-cols-7 margin-right-0">
-                <div class="daycontaner col temp">
-                    <div class="row">
-                        <div class="col">
-                            <div class="day-Nr">1</div>
-                            <div class="todo-nr">0</div>
-                        </div>
-                        <div class="day-red-day col">sveriges nationaldag</div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+        <!-- Button trigger modal -->
+        <button
+          class="btn btn-primary circle add-todo"
+          data-bs-toggle="modal"
+          data-bs-target="#newTodo"
+        >
+          <i class="fas fa-plus-circle"></i>
+        </button>
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="newTodo"
+          tabindex="-1"
+          aria-labelledby="newTodoLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content bg-secondary">
+              <div class="modal-header">
+                <h5 class="modal-title" id="newTodoLabel">Skapa Ny ToDo</h5>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-3">
+                    <label for="todoTitle" class="form-label">Titel</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="todoTitle"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      Ange en titel för din ToDo.
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="todoInfo" class="form-label">Information</label>
+                    <textarea
+                      class="form-control"
+                      id="todoInfo"
+                      rows="3"
+                    ></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="startDate" class="form-label">Startdatum</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="startDate"
+                      required
+                    />
+                    <div class="invalid-feedback">Ett datum måste väljas.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="stopDate" class="form-label">Slutdatum</label>
+                    <input type="date" class="form-control" id="stopDate" />
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-none d-sm-block col-sm-9 col-md-10 bg-success padding-right-0"
+      >
+        <div class="row margin-right-0">
+          <div class="col-12 padding-0">
+            <div
+              class="
+                d-flex
+                justify-content-between
+                align-items-center
+                bg-primary
+                fs-5
+                p-2
+                text-white
+              "
+            >
+              <button class="btn btn-primary fs-3">
+                <i class="fas fa-angle-left"></i>
+              </button>
+              <span>MÅNAD</span>
+              <button class="btn btn-primary">
+                <i class="fas fa-angle-right fs-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="
+            row
+            justify-content-center
+            row-cols-7
+            margin-right-0
+            text-center
+          "
+        >
+          <p class="col">Måndag</p>
+          <p class="col">Tisdag</p>
+          <p class="col">Onsdag</p>
+          <p class="col">Torsdag</p>
+          <p class="col">Fredag</p>
+          <p class="col">Lördag</p>
+          <p class="col">Söndag</p>
+        </div>
+        <div
+          id="calendar-Days"
+          class="row justify-content-center row-cols-7 margin-right-0"
+        >
+          <div class="daycontaner col temp">
+            <div class="row">
+              <div class="col">
+                <div class="day-Nr">1</div>
+                <div class="todo-nr">0</div>
+              </div>
+              <div class="day-red-day col">sveriges nationaldag</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-
-</body>
-
+  </body>
 </html>
