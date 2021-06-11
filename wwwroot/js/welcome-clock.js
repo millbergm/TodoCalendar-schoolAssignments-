@@ -1,10 +1,3 @@
-window.addEventListener('DOMContentLoaded', main);
-
-function main() {
-    getCurrentDateTime();
-    window.setInterval(getCurrentDateTime, 1000);
-}
-
 function getCurrentDateTime() {
     const timeElement = document.getElementById('welcome-time');
     const dateElement = document.getElementById('welcome-date');
