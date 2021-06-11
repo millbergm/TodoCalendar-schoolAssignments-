@@ -1,10 +1,10 @@
-const monthBackButton = document.getElementById('month-back');                        
+const monthBackButton = document.getElementById('month-back');
 monthBackButton.addEventListener('click', monthBack);
 
-const monthForwardButton = document.getElementById('month-forward');                        
+const monthForwardButton = document.getElementById('month-forward');
 monthForwardButton.addEventListener('click', monthForward);
 
-const monthSpan = document.getElementById("current-month"); 
+const monthSpan = document.getElementById("current-month");
 let currentDateChangeMonths;
 
 function initMonthButtons(date) {
