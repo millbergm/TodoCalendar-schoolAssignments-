@@ -42,21 +42,31 @@ function buldADay(dayinfo) {
     .cloneNode(true);
   daycontaner.classList.remove("temp");
 
-  daycontaner.querySelector(".day-Nr").innerText = datum[datum.length - 1];
-  daycontaner.querySelector(".todo-nr").innerText = 0; // call a function to get this
+  setTextOnComponent(daycontaner, ".day-Nr", datum[datum.length - 1]);
+
+  setTextOnComponent(
+    daycontaner,
+    ".todo-nr",
+    getTodosByDate(new Date(dayinfo.datum)) || 0
+  );
+
   daycontaner.dataset.calenderdate = dayinfo["datum"];
   if (dayinfo["röd dag"] === "Ja") {
     daycontaner.classList.add("red");
   }
 
   if (dayinfo["helgdag"]) {
-    daycontaner.querySelector(".day-red-day").innerText = dayinfo["helgdag"];
+    setTextOnComponent(daycontaner, ".day-red-day", dayinfo["helgdag"]);
   } else {
     daycontaner.querySelector(".day-red-day").remove();
   }
 
   const calendarDays = document.getElementById("calendar-Days");
   calendarDays.append(daycontaner);
+}
+
+function setTextOnComponent(contaner, querySelector, text) {
+  contaner.querySelector(querySelector).innerText = text;
 }
 
 function createEmtyDay() {

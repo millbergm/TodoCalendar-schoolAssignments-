@@ -1,6 +1,7 @@
-window.addEventListener('DOMContentLoaded', main);
+window.addEventListener("DOMContentLoaded", main);
 
 function main() {
-    getCurrentDateTime();
-    window.setInterval(getCurrentDateTime, 1000);
+  getCurrentDateTime();
+  window.setInterval(getCurrentDateTime, 1000);
+  initCalender();
 }
