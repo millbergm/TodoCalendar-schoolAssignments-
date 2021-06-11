@@ -42,7 +42,15 @@ function buldADay(dayinfo) {
   daycontaner.classList.remove("temp");
 
   setTextOnComponent(daycontaner, ".day-Nr", datum[datum.length - 1]);
-  setTextOnComponent(daycontaner, ".todo-nr", getTodosByDate(dayinfo.datum));
+
+  console.log(dayinfo.datum);
+  console.log(new Date(dayinfo.datum));
+  setTextOnComponent(
+    daycontaner,
+    ".todo-nr",
+    getTodosByDate(new Date(dayinfo.datum)) || 0
+  );
+
   daycontaner.dataset.calenderdate = dayinfo["datum"];
   if (dayinfo["röd dag"] === "Ja") {
     daycontaner.classList.add("red");
