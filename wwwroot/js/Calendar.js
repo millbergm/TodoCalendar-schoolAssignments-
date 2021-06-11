@@ -19,6 +19,7 @@ function setupCalender(year, month) {
     for (let index = 7; index > days[days.length - 1]["dag i vecka"]; index--) {
       createEmtyDay();
     }
+    setupClickEventOnDay();
   });
 }
 
@@ -88,4 +89,15 @@ function getDaysInfo(year, month, callback) {
     true // true for asynchronous
   );
   xmlHttp.send(null);
+}
+
+function setupClickEventOnDay() {
+  const allDays = document.querySelectorAll(
+    "div.daycontaner[data-calenderdate]"
+  );
+  allDays.forEach((day) => {
+    day.addEventListener("click", (event) => {
+      console.log(event);
+    });
+  });
 }
