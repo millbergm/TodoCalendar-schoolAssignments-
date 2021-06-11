@@ -43,8 +43,6 @@ function buldADay(dayinfo) {
 
   setTextOnComponent(daycontaner, ".day-Nr", datum[datum.length - 1]);
 
-  console.log(dayinfo.datum);
-  console.log(new Date(dayinfo.datum));
   setTextOnComponent(
     daycontaner,
     ".todo-nr",
