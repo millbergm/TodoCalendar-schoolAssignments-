@@ -95,9 +95,22 @@ function setupClickEventOnDay() {
   const allDays = document.querySelectorAll(
     "div.daycontaner[data-calenderdate]"
   );
+  let cutentSelektedDay = null;
   allDays.forEach((day) => {
     day.addEventListener("click", (event) => {
-      console.log(event);
+      const data = event.currentTarget.getAttribute("data-calenderdate");
+      if (cutentSelektedDay === data) {
+        cutentSelektedDay = null;
+      } else {
+        cutentSelektedDay = data;
+      }
+      document.querySelector(".selected")?.classList.remove("selected");
+
+      if (cutentSelektedDay) {
+        event.currentTarget.classList.add("selected");
+      }
+
+      console.log(cutentSelektedDay);
     });
   });
 }
