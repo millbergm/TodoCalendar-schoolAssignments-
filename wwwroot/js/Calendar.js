@@ -1,6 +1,7 @@
 function initCalender() {
   const currentDate = new Date();
   setupCalender(currentDate.getFullYear(), currentDate.getMonth() + 1);
+  initMonthButtons(currentDate);
 }
 
 function setupCalender(year, month) {

@@ -20,6 +20,7 @@
     <!-- <script defer src="./wwwroot/js/bootstrap.bundle.min.js"></script> -->
     <script src="https://kit.fontawesome.com/80fd7dc215.js" crossorigin="anonymous"></script>
     <script defer src="./wwwroot/js/welcome-clock.js"></script>
+    <script defer src="./wwwroot/js/calendar-change-months.js"></script>
     <script defer src="./wwwroot/js/Calendar.js"></script>
     <script defer src="./wwwroot/js/todo.js"></script>
 </head>
@@ -138,11 +139,11 @@
                 p-2
                 text-white
               ">
-                        <button class="btn btn-primary fs-3">
-                            <i class="fas fa-angle-left"></i>
+                        <button id="month-back" class="btn btn-primary">
+                            <i class="fas fa-angle-left fs-3"></i>
                         </button>
-                        <span>MÅNAD</span>
-                        <button class="btn btn-primary">
+                        <span id="current-month" class="text-capitalize">MÅNAD - ÅR</span>
+                        <button id="month-forward" class="btn btn-primary">
                             <i class="fas fa-angle-right fs-3"></i>
                         </button>
                     </div>
