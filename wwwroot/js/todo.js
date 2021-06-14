@@ -65,15 +65,15 @@ function saveTodosToLocalStorage() {
  function handleFormSubmit(event) {
      event.preventDefault();
      var todoTitle = document.getElementById('todoTitle');
-     var todoInfo = document.getElementById('todoInfo');
-     var startDate = document.getElementById('startDate').value;    
+     var todoInfo = document.getElementById('todoInfo');      
+     var startDate = document.getElementById('startDate').value;      
      var stopDate = document.getElementById('stopDate').value;
-     var TodoItem = {title: todoTitle.value, info: todoInfo.value, startDate: startDate, stopDate: stopDate.value, isDone: false}
+     var TodoItem = {title: todoTitle.value, info: todoInfo.value, startDate: startDate, stopDate: stopDate, isDone: false}
      allTodos.push(TodoItem);
      todoTitle.value = "";
      todoInfo.value = "";
      startDate.value = "";
-     stopDate.value = "";     
+     stopDate.value = "";
      
      saveTodosToLocalStorage();
     //  renderTodoList();
