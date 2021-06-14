@@ -71,9 +71,9 @@ function saveTodosToLocalStorage() {
      var TodoItem = {title: todoTitle.value, info: todoInfo.value, startDate: startDate, stopDate: stopDate, isDone: false}
      allTodos.push(TodoItem);
      todoTitle.value = "";
-     todoInfo.value = "";
-     startDate.value = "";
-     stopDate.value = "";
+     todoInfo.value = "";     
+     document.getElementById('startDate').value = "";
+     document.getElementById('stopDate').value = "";
      
      saveTodosToLocalStorage();
     //  renderTodoList();
