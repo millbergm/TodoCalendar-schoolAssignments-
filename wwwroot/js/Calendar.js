@@ -20,6 +20,7 @@ function setupCalender(year, month) {
     for (let index = 7; index > days[days.length - 1]["dag i vecka"]; index--) {
       createEmtyDay();
     }
+    setupClickEventOnDay();
   });
 }
 
@@ -89,4 +90,28 @@ function getDaysInfo(year, month, callback) {
     true // true for asynchronous
   );
   xmlHttp.send(null);
+}
+
+function setupClickEventOnDay() {
+  const allDays = document.querySelectorAll(
+    "div.daycontaner[data-calenderdate]"
+  );
+  let cutentSelektedDay = null;
+  allDays.forEach((day) => {
+    day.addEventListener("click", (event) => {
+      const data = event.currentTarget.getAttribute("data-calenderdate");
+      if (cutentSelektedDay === data) {
+        cutentSelektedDay = null;
+      } else {
+        cutentSelektedDay = data;
+      }
+      document.querySelector(".selected")?.classList.remove("selected");
+
+      if (cutentSelektedDay) {
+        event.currentTarget.classList.add("selected");
+      }
+
+      console.log(cutentSelektedDay);
+    });
+  });
 }

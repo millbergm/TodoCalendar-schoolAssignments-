@@ -33,6 +33,10 @@
   border: solid 1px black;
   min-height: 4rem;
   overflow: hidden;
+  word-wrap: break-word;
+}
+.selected {
+  border: solid 1px red;
 }
 
 .red .day-Nr,
@@ -49,7 +53,7 @@
   width: 14.28571428571429%;
 }
 
-.todobuttons{
-  height: auto; 
+.todobuttons {
+  height: auto;
   align-items: center;
 }
