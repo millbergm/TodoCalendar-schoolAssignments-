@@ -13,7 +13,7 @@ class TodoItem {
     }
 }
 
-var allTodos = new Array();
+var allTodos = new Array;
 
 function addFormEventListener() {
     let form = document.querySelector('form');
@@ -52,7 +52,7 @@ function getTodosByDate(date) {
 function initTodos() {
     const todoString = localStorage.getItem('allTodos');
     allTodos = JSON.parse(todoString || "[]");
-    renderTodoList();
+    // renderTodoList();
 }
 
 function saveTodosToLocalStorage() {
@@ -66,11 +66,14 @@ function saveTodosToLocalStorage() {
      event.preventDefault();
      var todoTitle = document.getElementById('todoTitle');
      var todoInfo = document.getElementById('todoInfo');
-     var startDate = document.getElementById('startDate');
-     var stopDate = document.getElementById('stopDate');
+     var startDate = document.getElementById('startDate').value;    
+     var stopDate = document.getElementById('stopDate').value;
      var TodoItem = {title: todoTitle.value, info: todoInfo.value, startDate: startDate, stopDate: stopDate.value, isDone: false}
      allTodos.push(TodoItem);
-     // input.value = "";
+     todoTitle.value = "";
+     todoInfo.value = "";
+     startDate.value = "";
+     stopDate.value = "";     
      
      saveTodosToLocalStorage();
     //  renderTodoList();
