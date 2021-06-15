@@ -4,7 +4,7 @@ let currentDateChangeMonths;
 function initMonthButtons(date) {
   document
     .querySelectorAll("button[data-month-move]")
-    .forEach((button) => button.addEventListener("click", monthmove));
+    .forEach((button) => button.addEventListener("click", monthMove));
 
   currentDateChangeMonths = date;
   monthSpan.innerText = currentDateChangeMonths.toLocaleString("sv-SE", {
@@ -13,7 +13,7 @@ function initMonthButtons(date) {
   });
 }
 
-function monthmove(event) {
+function monthMove(event) {
   changeMonths(parseInt(event.currentTarget.getAttribute("data-month-move")));
 }
 
