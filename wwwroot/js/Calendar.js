@@ -1,27 +1,32 @@
-function initCalender() {
-  const currentDate = new Date();
+function initCalender(currentDate) {
   setupCalender(currentDate.getFullYear(), currentDate.getMonth() + 1);
-  initMonthButtons(currentDate);
 }
 
-function setupCalender(year, month) {
-  getDaysInfo(year, month, (responseText) => {
-    const temp = document.querySelector(".daycontaner.temp").cloneNode(true);
-    const calendarDays = document.getElementById("calendar-Days");
-    calendarDays.innerHTML = "";
-    calendarDays.append(temp);
+async function setupCalender(year, month) {
+  try {
+    clearCalendar();
 
-    const response = JSON.parse(responseText);
-    const days = response.dagar;
+    const days = (await getDaysInfo(year, month)).dagar;
+
     for (let index = 1; index < days[0]["dag i vecka"]; index++) {
       createEmtyDay();
     }
+
     days.forEach((day) => buildADay(day));
+
     for (let index = 7; index > days[days.length - 1]["dag i vecka"]; index--) {
       createEmtyDay();
     }
+
     setupClickEventOnDay();
-  });
+  } catch (error) {}
+}
+
+function clearCalendar() {
+  const temp = document.querySelector(".daycontaner.temp").cloneNode(true);
+  const calendarDays = document.getElementById("calendar-Days");
+  calendarDays.innerHTML = "";
+  calendarDays.append(temp);
 }
 
 /*
@@ -37,7 +42,7 @@ function setupCalender(year, month) {
 */
 function buildADay(dayinfo) {
   const datum = dayinfo.datum.split("-");
-  console.log(dayinfo.datum,new Date(dayinfo.datum).getMonth())
+  console.log(dayinfo.datum, new Date(dayinfo.datum).getMonth());
 
   const daycontaner = document
     .querySelector(".daycontaner.temp")
@@ -79,18 +84,11 @@ function createEmtyDay() {
   calendarDays.append(emtyDay);
 }
 
-function getDaysInfo(year, month, callback) {
-  var xmlHttp = new XMLHttpRequest();
-  xmlHttp.onreadystatechange = function () {
-    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-      callback(xmlHttp.responseText);
-  };
-  xmlHttp.open(
-    "GET",
-    `https://sholiday.faboul.se/dagar/v2.1/${year}/${month}`,
-    true // true for asynchronous
+async function getDaysInfo(year, month) {
+  const response = await fetch(
+    `https://sholiday.faboul.se/dagar/v2.1/${year}/${month}`
   );
-  xmlHttp.send(null);
+  return response.json();
 }
 
 function setupClickEventOnDay() {
@@ -114,11 +112,9 @@ function setupClickEventOnDay() {
 
       console.log(cutentSelektedDay);
 
-      if (cutentSelektedDay){
-        
+      if (cutentSelektedDay) {
         populateTodoContainer(new Date(cutentSelektedDay));
-      }
-      else {
+      } else {
         populateTodoContainer(null);
       }
     });
