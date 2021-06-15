@@ -40,8 +40,9 @@ function clearCalendar() {
      </div>
 </div>
 */
-function buldADay(dayinfo) {
+function buildADay(dayinfo) {
   const datum = dayinfo.datum.split("-");
+  console.log(dayinfo.datum,new Date(dayinfo.datum).getMonth())
 
   const daycontaner = document
     .querySelector(".daycontaner.temp")
@@ -53,7 +54,7 @@ function buldADay(dayinfo) {
   setTextOnComponent(
     daycontaner,
     ".todo-nr",
-    getTodosByDate(new Date(dayinfo.datum)) || 0
+    getTodosByDate(new Date(dayinfo.datum))?.length || 0
   );
 
   daycontaner.dataset.calenderdate = dayinfo["datum"];
@@ -110,6 +111,14 @@ function setupClickEventOnDay() {
       }
 
       console.log(cutentSelektedDay);
+
+      if (cutentSelektedDay){
+        
+        populateTodoContainer(new Date(cutentSelektedDay));
+      }
+      else {
+        populateTodoContainer(null);
+      }
     });
   });
 }
