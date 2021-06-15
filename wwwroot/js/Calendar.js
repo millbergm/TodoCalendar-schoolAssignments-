@@ -98,7 +98,7 @@ function setupClickEventOnDay() {
   let cutentSelektedDay = null;
   allDays.forEach((day) => {
     day.addEventListener("click", (event) => {
-      const data = event.currentTarget.getAttribute("data-calenderdate");
+      const data = event.currentTarget.dataset.calenderdate;
       if (cutentSelektedDay === data) {
         cutentSelektedDay = null;
       } else {
