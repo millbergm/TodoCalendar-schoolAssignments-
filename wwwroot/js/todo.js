@@ -43,28 +43,28 @@ function addNewTodo(TodoItem) {
 // Testdata!
 // allTodos.length = 0;
 addNewTodo(
-  (TodoItem = {
-    title: "foo1_title",
-    info: "foo1",
-    startDate: new Date(2021, 05, 14),
-    stopDate: new Date(2021, 11, 11),
-  })
+  new TodoItem(
+    "foo1_title",
+    "foo1",
+    new Date(2021, 05, 14),
+    new Date(2021, 11, 11)
+  )
 );
 addNewTodo(
-  (TodoItem = {
-    title: "foo2_title",
-    info: "foo2",
-    startDate: new Date(2021, 05, 14),
-    stopDate: new Date(2021, 10, 10),
-  })
+  new TodoItem(
+    "foo2_title",
+    "foo2",
+    new Date(2021, 05, 14),
+    new Date(2021, 10, 10)
+  )
 );
 addNewTodo(
-  (TodoItem = {
-    title: "foo3_title",
-    info: "foo3",
-    startDate: new Date(2021, 06, 15),
-    stopDate: new Date(2021, 9, 9),
-  })
+  new TodoItem(
+    "foo3_title",
+    "foo3",
+    new Date(2021, 06, 15),
+    new Date(2021, 9, 9)
+  )
 );
 
 function deleteTodoByIndex(i) {
@@ -132,8 +132,8 @@ function populateTodoContainer(date) {
 
   for (const todo of todos) {
     todoitem = todotemp.cloneNode(true);
-
-    setId(todoitem);
+    setId(todoitem, todo.id);
+    todoitem.dataset.id = todo.id;
 
     todoitem.classList.remove("temp");
     todoitem.querySelector(".accordion-header p").innerHTML = todo.title;
@@ -165,10 +165,11 @@ function todoDelete(event) {
   console.log("todoDelete");
 }
 
-function setId(todotemp) {
-  const headingId = "headingId" + uuidv4();
-  const collapseId = "collapseId" + uuidv4();
-  const AccordionId = "AccordionId" + uuidv4();
+function setId(todotemp, id) {
+  console.log(todotemp, id);
+  const headingId = "headingId" + id;
+  const collapseId = "collapseId" + id;
+  const AccordionId = "AccordionId" + id;
 
   const todoAccordion = todotemp.querySelector("#todoAccordion");
   const headingOne = todotemp.querySelector("#headingOne");
@@ -184,15 +185,6 @@ function setId(todotemp) {
   collapseOne.id = collapseId;
   collapseOne.setAttribute("aria-labelledby", headingId);
   collapseOne.dataset.bsParent = "#" + AccordionId;
-}
-
-function uuidv4() {
-  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
-    (
-      c ^
-      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
-    ).toString(16)
-  );
 }
 
 // Testdata här!

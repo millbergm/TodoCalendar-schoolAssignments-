@@ -14,7 +14,7 @@ function initMonthButtons(date) {
 }
 
 function monthMove(event) {
-  changeMonths(parseInt(event.currentTarget.getAttribute("data-month-move")));
+  changeMonths(parseInt(event.currentTarget.dataset.monthMove));
 }
 
 function changeMonths(change) {
