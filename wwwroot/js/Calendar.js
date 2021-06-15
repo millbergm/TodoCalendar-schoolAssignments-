@@ -12,7 +12,7 @@ async function setupCalender(year, month) {
       createEmtyDay();
     }
 
-    days.forEach((day) => buldADay(day));
+    days.forEach((day) => buildADay(day));
 
     for (let index = 7; index > days[days.length - 1]["dag i vecka"]; index--) {
       createEmtyDay();
@@ -42,7 +42,7 @@ function clearCalendar() {
 */
 function buildADay(dayinfo) {
   const datum = dayinfo.datum.split("-");
-  console.log(dayinfo.datum,new Date(dayinfo.datum).getMonth())
+  console.log(dayinfo.datum, new Date(dayinfo.datum).getMonth());
 
   const daycontaner = document
     .querySelector(".daycontaner.temp")
@@ -112,11 +112,9 @@ function setupClickEventOnDay() {
 
       console.log(cutentSelektedDay);
 
-      if (cutentSelektedDay){
-        
+      if (cutentSelektedDay) {
         populateTodoContainer(new Date(cutentSelektedDay));
-      }
-      else {
+      } else {
         populateTodoContainer(null);
       }
     });

@@ -7,6 +7,6 @@ function main() {
   window.setInterval(getCurrentDateTime, 1000);
   initCalender(currentDate);
   initMonthButtons(currentDate);
-  initTodos();
+  initTodo();
   addFormEventListener();
 }
