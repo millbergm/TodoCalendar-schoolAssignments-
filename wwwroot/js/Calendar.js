@@ -7,26 +7,28 @@ function initCalender() {
 async function setupCalender(year, month) {
   try {
     clearCalendar();
-    
+
     const days = (await getDaysInfo(year, month)).dagar;
 
     for (let index = 1; index < days[0]["dag i vecka"]; index++) {
       createEmtyDay();
     }
+
     days.forEach((day) => buldADay(day));
+
     for (let index = 7; index > days[days.length - 1]["dag i vecka"]; index--) {
       createEmtyDay();
     }
+    
     setupClickEventOnDay();
   } catch (error) {}
 }
 
-function clearCalendar()
-{
-   const temp = document.querySelector(".daycontaner.temp").cloneNode(true);
-   const calendarDays = document.getElementById("calendar-Days");
-   calendarDays.innerHTML = "";
-   calendarDays.append(temp);
+function clearCalendar() {
+  const temp = document.querySelector(".daycontaner.temp").cloneNode(true);
+  const calendarDays = document.getElementById("calendar-Days");
+  calendarDays.innerHTML = "";
+  calendarDays.append(temp);
 }
 
 /*
