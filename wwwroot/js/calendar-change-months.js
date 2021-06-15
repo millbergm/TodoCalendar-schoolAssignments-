@@ -1,11 +1,11 @@
-document
-  .querySelectorAll("button[data-month-move]")
-  .forEach((button) => button.addEventListener("click", monthmove));
-
 const monthSpan = document.getElementById("current-month");
 let currentDateChangeMonths;
 
 function initMonthButtons(date) {
+  document
+    .querySelectorAll("button[data-month-move]")
+    .forEach((button) => button.addEventListener("click", monthmove));
+
   currentDateChangeMonths = date;
   monthSpan.innerText = currentDateChangeMonths.toLocaleString("sv-SE", {
     month: "long",
