@@ -116,13 +116,13 @@
                                     <input type="date" class="form-control" id="stopDate" />
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                    Close
-                                  </button>
-                                  <button type="submit" id="my_button" class="btn btn-primary" >Submit</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                    <button type="submit" id="my_button" class="btn btn-primary">Submit</button>
                                 </div>
-                            </form>                        
-                        </div>                        
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -139,11 +139,11 @@
                 p-2
                 text-white
               ">
-                        <button id="month-back" class="btn btn-primary">
+                        <button id="month-back" data-month-move="-1" class="btn btn-primary">
                             <i class="fas fa-angle-left fs-3"></i>
                         </button>
                         <span id="current-month" class="text-capitalize">MÅNAD - ÅR</span>
-                        <button id="month-forward" class="btn btn-primary">
+                        <button id="month-forward" data-month-move="1" class="btn btn-primary">
                             <i class="fas fa-angle-right fs-3"></i>
                         </button>
                     </div>

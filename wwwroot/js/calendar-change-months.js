@@ -1,8 +1,6 @@
-const monthBackButton = document.getElementById("month-back");
-monthBackButton.addEventListener("click", monthBack);
-
-const monthForwardButton = document.getElementById("month-forward");
-monthForwardButton.addEventListener("click", monthForward);
+document
+  .querySelectorAll("button[data-month-move]")
+  .forEach((button) => button.addEventListener("click", monthmove));
 
 const monthSpan = document.getElementById("current-month");
 let currentDateChangeMonths;
@@ -15,12 +13,8 @@ function initMonthButtons(date) {
   });
 }
 
-function monthBack() {
-  changeMonths(-1);
-}
-
-function monthForward() {
-  changeMonths(1);
+function monthmove(event) {
+  changeMonths(parseInt(event.currentTarget.getAttribute("data-month-move")));
 }
 
 function changeMonths(change) {
