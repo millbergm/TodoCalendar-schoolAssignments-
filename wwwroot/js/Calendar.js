@@ -16,7 +16,7 @@ function setupCalender(year, month) {
     for (let index = 1; index < days[0]["dag i vecka"]; index++) {
       createEmtyDay();
     }
-    days.forEach((day) => buldADay(day));
+    days.forEach((day) => buildADay(day));
     for (let index = 7; index > days[days.length - 1]["dag i vecka"]; index--) {
       createEmtyDay();
     }
@@ -35,8 +35,9 @@ function setupCalender(year, month) {
      </div>
 </div>
 */
-function buldADay(dayinfo) {
+function buildADay(dayinfo) {
   const datum = dayinfo.datum.split("-");
+  console.log(dayinfo.datum,new Date(dayinfo.datum).getMonth())
 
   const daycontaner = document
     .querySelector(".daycontaner.temp")
@@ -48,7 +49,7 @@ function buldADay(dayinfo) {
   setTextOnComponent(
     daycontaner,
     ".todo-nr",
-    getTodosByDate(new Date(dayinfo.datum)) || 0
+    getTodosByDate(new Date(dayinfo.datum))?.length || 0
   );
 
   daycontaner.dataset.calenderdate = dayinfo["datum"];
@@ -112,6 +113,14 @@ function setupClickEventOnDay() {
       }
 
       console.log(cutentSelektedDay);
+
+      if (cutentSelektedDay){
+        
+        populateTodoContainer(new Date(cutentSelektedDay));
+      }
+      else {
+        populateTodoContainer(null);
+      }
     });
   });
 }
