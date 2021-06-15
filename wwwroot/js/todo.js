@@ -1,9 +1,30 @@
+var allTodos = new Array;
+
 function initTodo() {
   populateTodoContainer();
-  const todoString = localStorage.getItem("allTodos");
-  // TODO: Lägg till raden nedan igen! Pajjar test-datan nedanför.
-  // allTodos = JSON.parse(todoString || "[]");
+    fetchTodosFromLocalStorage();
   // renderTodoList();
+}
+
+function fetchTodosFromLocalStorage() {
+  const todoString = localStorage.getItem("allTodos");
+  // console.log(todoString);
+    try {
+      allTodos = JSON.parse(todoString)
+            .map(todo => {
+                return new TodoItem (
+                    todo.id,
+                    todo.title,
+                    todo.startDate,
+                    todo.stopDate,
+                    todo.isDone
+                )
+        });
+        // console.log(allTodos);
+    }
+    catch(error) {
+        console.error(error);
+    }
 }
 
 class TodoItem {
@@ -11,25 +32,26 @@ class TodoItem {
    * @param {Date} startDate
    * @param {Date} stopDate
    */
-  constructor(title, info, startDate, stopDate) {
-    this.id = incrementId();
+  constructor(id, title, info, startDate, stopDate, isDone) {
+    this.id = id || incrementId();
     this.title = title;
     this.info = info;
     this.startDate = startDate;
     this.stopDate = stopDate;
-    this.isDone = false;
+    this.isDone = isDone; 
   }
+    // constructor(obj) {
+    //     Object.assign(this, obj)
+    // }
 }
 
-var nextId = 0;
+var nextId = 1;
 // TODO: Spara i local storage tillsamman med arrayen.
 
 function incrementId() {
   return nextId++;
 }
 
-// TODO: Kan behöva ändra denna när man använder JSON.parse (se ovan)?
-var allTodos = new Array();
 
 function addFormEventListener() {
   let form = document.querySelector("form");
@@ -42,30 +64,6 @@ function addNewTodo(TodoItem) {
 
 // Testdata!
 // allTodos.length = 0;
-addNewTodo(
-  new TodoItem(
-    "foo1_title",
-    "foo1",
-    new Date(2021, 05, 14),
-    new Date(2021, 11, 11)
-  )
-);
-addNewTodo(
-  new TodoItem(
-    "foo2_title",
-    "foo2",
-    new Date(2021, 05, 14),
-    new Date(2021, 10, 10)
-  )
-);
-addNewTodo(
-  new TodoItem(
-    "foo3_title",
-    "foo3",
-    new Date(2021, 06, 15),
-    new Date(2021, 9, 9)
-  )
-);
 
 function deleteTodoByIndex(i) {
   allTodos.splice(i, 1);
@@ -104,7 +102,7 @@ function getFullDate(date) {
 }
 
 function getAllTodos() {
-  console.log("allTodos");
+  // console.log("allTodos");
   return allTodos;
 }
 
@@ -122,13 +120,13 @@ function populateTodoContainer(date) {
 
   let todos = [];
   if (date) {
-    console.log("date", date);
+    // console.log("date", date);
     todos = getTodosByDate(date);
   } else {
     // console.log("hjghfjfjgfhj");
     todos = getAllTodos();
   }
-  console.log(todos);
+  // console.log(todos);
 
   for (const todo of todos) {
     todoitem = todotemp.cloneNode(true);
@@ -188,7 +186,7 @@ function setId(todotemp, id) {
 }
 
 // Testdata här!
-console.log(allTodos);
+// console.log(allTodos);
 // populateTodoContainer(new Date(2021, 05, 14));
 // Testdata här!
 
@@ -218,17 +216,19 @@ function handleFormSubmit(event) {
   document.getElementById("startDate").value = "";
   document.getElementById("stopDate").value = "";
 
+    console.log("handleFormSubmit");
+
   saveTodosToLocalStorage();
   //  renderTodoList();
 }
 
-function renderTodoList() {
-  const ul = document.querySelector("ul");
-  ul.innerText = "";
+// function renderTodoList() {
+//   const ul = document.querySelector("ul");
+//   ul.innerText = "";
 
-  for (var todo of allTodos) {
-    const li = document.createElement("li");
-    li.innerText = todo;
-    ul.append(li);
-  }
-}
+//   for (var todo of allTodos) {
+//     const li = document.createElement("li");
+//     li.innerText = todo;
+//     ul.append(li);
+//   }
+// }
