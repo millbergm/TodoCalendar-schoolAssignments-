@@ -1,7 +1,5 @@
-function initCalender() {
-  const currentDate = new Date();
+function initCalender(currentDate) {
   setupCalender(currentDate.getFullYear(), currentDate.getMonth() + 1);
-  initMonthButtons(currentDate);
 }
 
 async function setupCalender(year, month) {
@@ -19,7 +17,7 @@ async function setupCalender(year, month) {
     for (let index = 7; index > days[days.length - 1]["dag i vecka"]; index--) {
       createEmtyDay();
     }
-    
+
     setupClickEventOnDay();
   } catch (error) {}
 }
