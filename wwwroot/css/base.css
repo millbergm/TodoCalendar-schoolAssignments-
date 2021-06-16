@@ -1,6 +1,11 @@
 html,
-body {
+body,
+.fullheght {
   height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
 }
 
 .add-todo {

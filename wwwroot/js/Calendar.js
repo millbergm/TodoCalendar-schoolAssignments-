@@ -80,7 +80,6 @@ function setTextOnComponent(contaner, querySelector, text) {
 function createEmtyDay() {
   const emtyDay = document.createElement("div");
   emtyDay.classList.add("daycontaner");
-  emtyDay.classList.add("col");
   const calendarDays = document.getElementById("calendar-Days");
   calendarDays.append(emtyDay);
 }
