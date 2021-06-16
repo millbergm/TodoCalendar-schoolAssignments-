@@ -86,7 +86,15 @@ function getTodosByDate(date) {
   let todosByDate = [];
 
   todosByDate = allTodos.filter((TodoItem) => {
-    return getFullDate(TodoItem.startDate) === getFullDate(date);
+    if (getFullDate(TodoItem.startDate) === getFullDate(date)) {
+      return true;
+    } else if (TodoItem.startDate < date && TodoItem.stopDate > date) {
+      return true;
+    } else if (getFullDate(TodoItem.stopDate) === getFullDate(date)) {
+      return true;
+    } else {
+      return false;
+    }
   });
 
   return todosByDate;
