@@ -68,7 +68,7 @@
                                                 data-bs-toggle="button" autocomplete="off">
                                                 <i class="fas fa-check" style="font-size: 16px"></i>
                                             </button>
-                                            <button type="button" class="btn btn-outline-light btn-sm todoEdit">
+                                            <button type="button" class="btn btn-outline-light btn-sm todoEdit" data-bs-toggle="modal" data-bs-target="#editTodo">
                                                 <i class="fas fa-edit" style="font-size: 16px"></i>
                                             </button>
                                             <button type="button" class="btn btn-outline-light btn-sm todoDelete">
@@ -78,6 +78,47 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal edit todo -->
+            <div class="modal fade" id="editTodo" tabindex="-1" aria-labelledby="editTodoLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content bg-secondary">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editTodoLabel">Redigera ToDo</h5>
+                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="todoTitle" class="form-label">Titel</label>
+                                    <input type="text" class="form-control" id="todoTitle" required />
+                                    <!-- <div class="invalid-feedback">
+                                        Ange en titel för din ToDo.
+                                    </div> -->
+                                </div>
+                                <div class="mb-3">
+                                    <label for="todoInfo" class="form-label">Information</label>
+                                    <textarea class="form-control" id="todoInfo" rows="3"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="startDate" class="form-label">Startdatum</label>
+                                    <input type="date" class="form-control" id="startDate" required />
+                                    <!-- <div class="invalid-feedback">Ett datum måste väljas.</div> -->
+                                </div>
+                                <div class="mb-3">
+                                    <label for="stopDate" class="form-label">Slutdatum</label>
+                                    <input type="date" class="form-control" id="stopDate" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                    <button type="submit" id="my_button" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
