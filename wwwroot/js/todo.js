@@ -158,7 +158,7 @@ function todoEdit(event) {
 }
 
 function todoDelete(event) {
-    var idOfSelectedTodo = event.currentTarget.dataset.id;
+    const idOfSelectedTodo = event.currentTarget.dataset.id;
     deleteTodoById(parseInt(idOfSelectedTodo));
 }
 
