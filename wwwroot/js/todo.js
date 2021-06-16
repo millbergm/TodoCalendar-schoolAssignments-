@@ -2,6 +2,7 @@ var allTodos = new Array();
 
 function initTodo() {
   fetchDataFromLocalStorage();
+  populateTodoContainer();
 }
 
 function fetchDataFromLocalStorage() {
@@ -61,6 +62,7 @@ function deleteTodoById(id) {
     let indexToRemove = allTodos.findIndex(obj => obj.id === id);
     indexToRemove !== -1 ? allTodos.splice(indexToRemove, 1) : console.error("Index doesn't exist.");
     saveDataToLocalStorage();
+    reloadContent();
 }
 
 function changeStatusOfTodo(i) {
@@ -183,10 +185,6 @@ function setId(todotemp, id) {
   collapseOne.setAttribute("aria-labelledby", headingId);
   collapseOne.dataset.bsParent = "#" + AccordionId;
 }
-
-// Testdata här!
-// populateTodoContainer(new Date(2021, 05, 14));
-// Testdata här!
 
 function saveDataToLocalStorage() {
   localStorage.setItem("allTodos", JSON.stringify(allTodos));
