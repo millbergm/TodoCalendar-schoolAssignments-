@@ -1,8 +1,8 @@
 var allTodos = new Array();
 
 function initTodo() {
-  populateTodoContainer();
   fetchDataFromLocalStorage();
+  populateTodoContainer();
   // renderTodoList();
 }
 
@@ -10,7 +10,6 @@ function fetchDataFromLocalStorage() {
   const todoString = localStorage.getItem("allTodos");
   const nextIdString = localStorage.getItem("nextId");
   nextId = JSON.parse(nextIdString);
-  // console.log(todoString);
   try {
     allTodos = JSON.parse(todoString).map((todo) => {
       return new TodoItem(
@@ -22,7 +21,6 @@ function fetchDataFromLocalStorage() {
         todo.isDone
       );
     });
-    // console.log(allTodos);
   } catch (error) {
     console.error("The local storage is empty, create a new todo.", error);
   }
@@ -86,9 +84,17 @@ function changeStatusOfTodo(i) {
  */
 function getTodosByDate(date) {
   let todosByDate = [];
-  
+
   todosByDate = allTodos.filter((TodoItem) => {
-    getFullDate(TodoItem.startDate) === getFullDate(date);
+    if (getFullDate(TodoItem.startDate) === getFullDate(date)) {
+      return true;
+    } else if (TodoItem.startDate < date && TodoItem.stopDate > date) {
+      return true;
+    } else if (getFullDate(TodoItem.stopDate) === getFullDate(date)) {
+      return true;
+    } else {
+      return false;
+    }
   });
 
   return todosByDate;
@@ -182,7 +188,6 @@ function setId(todotemp, id) {
 }
 
 // Testdata här!
-// console.log(allTodos);
 // populateTodoContainer(new Date(2021, 05, 14));
 // Testdata här!
 
