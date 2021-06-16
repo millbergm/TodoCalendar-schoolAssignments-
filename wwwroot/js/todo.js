@@ -1,30 +1,29 @@
-var allTodos = new Array;
+var allTodos = new Array();
 
 function initTodo() {
   populateTodoContainer();
-    fetchTodosFromLocalStorage();
+  fetchTodosFromLocalStorage();
   // renderTodoList();
 }
 
 function fetchTodosFromLocalStorage() {
   const todoString = localStorage.getItem("allTodos");
   // console.log(todoString);
-    try {
-      allTodos = JSON.parse(todoString)
-            .map(todo => {
-                return new TodoItem (
-                    todo.id,
-                    todo.title,
-                    todo.startDate,
-                    todo.stopDate,
-                    todo.isDone
-                )
-        });
-        // console.log(allTodos);
-    }
-    catch(error) {
-        console.error(error);
-    }
+  try {
+    allTodos = JSON.parse(todoString).map((todo) => {
+      return new TodoItem(
+        todo.id,
+        todo.title,
+        todo.info,
+        todo.startDate,
+        todo.stopDate,
+        todo.isDone
+      );
+    });
+    // console.log(allTodos);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 class TodoItem {
@@ -36,13 +35,13 @@ class TodoItem {
     this.id = id || incrementId();
     this.title = title;
     this.info = info;
-    this.startDate = startDate;
-    this.stopDate = stopDate;
-    this.isDone = isDone; 
+    this.startDate = new Date(startDate);
+    this.stopDate = new Date(stopDate);
+    this.isDone = isDone;
   }
-    // constructor(obj) {
-    //     Object.assign(this, obj)
-    // }
+  // constructor(obj) {
+  //     Object.assign(this, obj)
+  // }
 }
 
 var nextId = 1;
@@ -51,7 +50,6 @@ var nextId = 1;
 function incrementId() {
   return nextId++;
 }
-
 
 function addFormEventListener() {
   let form = document.querySelector("form");
@@ -86,9 +84,12 @@ function changeStatusOfTodo(i) {
  */
 function getTodosByDate(date) {
   let todosByDate = [];
-  todosByDate = allTodos.filter(
-    (TodoItem) => getFullDate(TodoItem.startDate) === getFullDate(date)
-  );
+  console.log("allTodos", allTodos);
+  todosByDate = allTodos.filter((TodoItem) => {
+    console.log("TodoItem", TodoItem.startDate);
+    console.log("date", date);
+    getFullDate(TodoItem.startDate) === getFullDate(date);
+  });
 
   return todosByDate;
 }
@@ -102,7 +103,6 @@ function getFullDate(date) {
 }
 
 function getAllTodos() {
-  // console.log("allTodos");
   return allTodos;
 }
 
@@ -191,6 +191,7 @@ function setId(todotemp, id) {
 // Testdata här!
 
 function saveTodosToLocalStorage() {
+  console.log("saveTodosToLocalStorage allTodos", allTodos);
   localStorage.setItem("allTodos", JSON.stringify(allTodos));
 }
 
@@ -201,22 +202,23 @@ function handleFormSubmit(event) {
   event.preventDefault();
   var todoTitle = document.getElementById("todoTitle");
   var todoInfo = document.getElementById("todoInfo");
-  var startDate = document.getElementById("startDate").value;
-  var stopDate = document.getElementById("stopDate").value;
-  var TodoItem = {
-    title: todoTitle.value,
-    info: todoInfo.value,
-    startDate: startDate,
-    stopDate: stopDate,
-    isDone: false,
-  };
-  allTodos.push(TodoItem);
+  var startDate = new Date(document.getElementById("startDate").value);
+  var stopDate = new Date(document.getElementById("stopDate").value);
+  var todoItem = new TodoItem(
+    0,
+    todoTitle.value,
+    todoInfo.value,
+    startDate,
+    stopDate,
+    false
+  );
+  allTodos.push(todoItem);
   todoTitle.value = "";
   todoInfo.value = "";
   document.getElementById("startDate").value = "";
   document.getElementById("stopDate").value = "";
 
-    console.log("handleFormSubmit");
+  console.log("handleFormSubmit");
 
   saveTodosToLocalStorage();
   //  renderTodoList();

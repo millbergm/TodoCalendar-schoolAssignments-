@@ -51,6 +51,7 @@ function buildADay(dayinfo) {
 
   setTextOnComponent(daycontaner, ".day-Nr", datum[datum.length - 1]);
 
+  console.log("loging", getTodosByDate(new Date(dayinfo.datum)));
   setTextOnComponent(
     daycontaner,
     ".todo-nr",
