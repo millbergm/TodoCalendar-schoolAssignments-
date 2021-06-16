@@ -1,8 +1,8 @@
 var allTodos = new Array();
 
 function initTodo() {
-  populateTodoContainer();
   fetchDataFromLocalStorage();
+  populateTodoContainer();
   // renderTodoList();
 }
 
@@ -86,9 +86,9 @@ function changeStatusOfTodo(i) {
  */
 function getTodosByDate(date) {
   let todosByDate = [];
-  
+
   todosByDate = allTodos.filter((TodoItem) => {
-    getFullDate(TodoItem.startDate) === getFullDate(date);
+    return getFullDate(TodoItem.startDate) === getFullDate(date);
   });
 
   return todosByDate;

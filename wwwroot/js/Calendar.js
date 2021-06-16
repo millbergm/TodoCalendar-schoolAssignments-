@@ -49,7 +49,7 @@ function buildADay(dayinfo) {
   daycontaner.classList.remove("temp");
 
   if (state.cutentSelektedDay === dayinfo["datum"]) {
-    daycontaner.classList.add('selected');
+    daycontaner.classList.add("selected");
   }
   setTextOnComponent(daycontaner, ".day-Nr", datum[datum.length - 1]);
 
