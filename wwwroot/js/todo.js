@@ -192,8 +192,8 @@ function setId(todotemp, id) {
 // populateTodoContainer(new Date(2021, 05, 14));
 // Testdata här!
 
-function saveTodosToLocalStorage() {
-  console.log("saveTodosToLocalStorage allTodos", allTodos);
+function saveDataToLocalStorage() {
+  console.log("saveDataToLocalStorage", allTodos);
   localStorage.setItem("allTodos", JSON.stringify(allTodos));
   localStorage.setItem("nextId", JSON.stringify(nextId));
 }
@@ -223,7 +223,7 @@ function handleFormSubmit(event) {
 
   console.log("handleFormSubmit");
 
-  saveTodosToLocalStorage();
+  saveDataToLocalStorage();
   //  renderTodoList();
 }
 
