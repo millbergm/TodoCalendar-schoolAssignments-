@@ -106,8 +106,6 @@ function setupClickEventOnDay() {
         state.cutentSelektedDay = data;
       }
 
-      console.log(state.cutentSelektedDay);
-
       reloadContent();
     });
   });

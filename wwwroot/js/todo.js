@@ -10,7 +10,6 @@ function fetchDataFromLocalStorage() {
   const todoString = localStorage.getItem("allTodos");
   const nextIdString = localStorage.getItem("nextId");
   nextId = JSON.parse(nextIdString);
-  // console.log(todoString);
   try {
     allTodos = JSON.parse(todoString).map((todo) => {
       return new TodoItem(
@@ -22,7 +21,6 @@ function fetchDataFromLocalStorage() {
         todo.isDone
       );
     });
-    // console.log(allTodos);
   } catch (error) {
     console.error("The local storage is empty, create a new todo.", error);
   }
@@ -182,7 +180,6 @@ function setId(todotemp, id) {
 }
 
 // Testdata här!
-// console.log(allTodos);
 // populateTodoContainer(new Date(2021, 05, 14));
 // Testdata här!
 
