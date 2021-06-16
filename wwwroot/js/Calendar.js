@@ -42,16 +42,17 @@ function clearCalendar() {
 */
 function buildADay(dayinfo) {
   const datum = dayinfo.datum.split("-");
-  console.log(dayinfo.datum, new Date(dayinfo.datum).getMonth());
 
   const daycontaner = document
     .querySelector(".daycontaner.temp")
     .cloneNode(true);
   daycontaner.classList.remove("temp");
 
+  if (state.cutentSelektedDay === dayinfo["datum"]) {
+    daycontaner.classList.add("selected");
+  }
   setTextOnComponent(daycontaner, ".day-Nr", datum[datum.length - 1]);
 
-  console.log("loging", getTodosByDate(new Date(dayinfo.datum)));
   setTextOnComponent(
     daycontaner,
     ".todo-nr",
@@ -99,24 +100,13 @@ function setupClickEventOnDay() {
   allDays.forEach((day) => {
     day.addEventListener("click", (event) => {
       const data = event.currentTarget.dataset.calenderdate;
-      if (cutentSelektedDay === data) {
-        cutentSelektedDay = null;
+      if (state.cutentSelektedDay === data) {
+        state.cutentSelektedDay = null;
       } else {
-        cutentSelektedDay = data;
-      }
-      document.querySelector(".selected")?.classList.remove("selected");
-
-      if (cutentSelektedDay) {
-        event.currentTarget.classList.add("selected");
+        state.cutentSelektedDay = data;
       }
 
-      console.log(cutentSelektedDay);
-
-      if (cutentSelektedDay) {
-        populateTodoContainer(new Date(cutentSelektedDay));
-      } else {
-        populateTodoContainer(null);
-      }
+      reloadContent();
     });
   });
 }
