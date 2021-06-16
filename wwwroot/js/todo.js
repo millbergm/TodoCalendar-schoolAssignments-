@@ -38,9 +38,6 @@ class TodoItem {
     this.stopDate = new Date(stopDate);
     this.isDone = isDone;
   }
-  // constructor(obj) {
-  //     Object.assign(this, obj)
-  // }
 }
 
 var nextId = 1;
@@ -217,16 +214,4 @@ function handleFormSubmit(event) {
   console.log("handleFormSubmit");
 
   saveDataToLocalStorage();
-  //  renderTodoList();
 }
-
-// function renderTodoList() {
-//   const ul = document.querySelector("ul");
-//   ul.innerText = "";
-
-//   for (var todo of allTodos) {
-//     const li = document.createElement("li");
-//     li.innerText = todo;
-//     ul.append(li);
-//   }
-// }
