@@ -52,7 +52,7 @@ function incrementId() {
 }
 
 function addFormEventListener() {
-  let form = document.querySelector("form");
+  let form = document.getElementById("newTodoForm");
   form.addEventListener("submit", handleFormSubmit);
 }
 
