@@ -3,7 +3,6 @@ var allTodos = new Array();
 function initTodo() {
   populateTodoContainer();
   fetchDataFromLocalStorage();
-  // renderTodoList();
 }
 
 function fetchDataFromLocalStorage() {
@@ -22,7 +21,7 @@ function fetchDataFromLocalStorage() {
         todo.isDone
       );
     });
-    // console.log(allTodos);
+    console.log(allTodos);
   } catch (error) {
     console.error("The local storage is empty, create a new todo.", error);
   }
@@ -47,7 +46,6 @@ class TodoItem {
 }
 
 var nextId = 1;
-// TODO: Spara i local storage tillsamman med arrayen.
 
 function incrementId() {
   return nextId++;
@@ -62,11 +60,10 @@ function addNewTodo(TodoItem) {
   allTodos.push(TodoItem);
 }
 
-// Testdata!
-// allTodos.length = 0;
-
-function deleteTodoByIndex(i) {
-  allTodos.splice(i, 1);
+function deleteTodoById(id) {
+    let indexToRemove = allTodos.findIndex(obj => obj.id === id);
+    indexToRemove !== -1 ? allTodos.splice(indexToRemove, 1) : console.error("Index doesn't exist.");
+    saveDataToLocalStorage();
 }
 
 function changeStatusOfTodo(i) {
@@ -86,10 +83,10 @@ function changeStatusOfTodo(i) {
  */
 function getTodosByDate(date) {
   let todosByDate = [];
-  console.log("allTodos", allTodos);
+  // console.log("allTodos", allTodos);
   todosByDate = allTodos.filter((TodoItem) => {
-    console.log("TodoItem", TodoItem.startDate);
-    console.log("date", date);
+    // console.log("TodoItem", TodoItem.startDate);
+    // console.log("date", date);
     getFullDate(TodoItem.startDate) === getFullDate(date);
   });
 
@@ -162,7 +159,8 @@ function todoEdit(event) {
 }
 
 function todoDelete(event) {
-  console.log("todoDelete");
+    var idOfSelectedTodo = event.currentTarget.dataset.id;
+    deleteTodoById(parseInt(idOfSelectedTodo));
 }
 
 function setId(todotemp, id) {
