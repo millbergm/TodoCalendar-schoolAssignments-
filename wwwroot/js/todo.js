@@ -2,12 +2,14 @@ var allTodos = new Array();
 
 function initTodo() {
   populateTodoContainer();
-  fetchTodosFromLocalStorage();
+  fetchDataFromLocalStorage();
   // renderTodoList();
 }
 
-function fetchTodosFromLocalStorage() {
+function fetchDataFromLocalStorage() {
   const todoString = localStorage.getItem("allTodos");
+  const nextIdString = localStorage.getItem("nextId");
+  nextId = JSON.parse(nextIdString);
   // console.log(todoString);
   try {
     allTodos = JSON.parse(todoString).map((todo) => {
@@ -22,7 +24,7 @@ function fetchTodosFromLocalStorage() {
     });
     // console.log(allTodos);
   } catch (error) {
-    console.error(error);
+    console.error("The local storage is empty, create a new todo.", error);
   }
 }
 
@@ -193,6 +195,7 @@ function setId(todotemp, id) {
 function saveTodosToLocalStorage() {
   console.log("saveTodosToLocalStorage allTodos", allTodos);
   localStorage.setItem("allTodos", JSON.stringify(allTodos));
+  localStorage.setItem("nextId", JSON.stringify(nextId));
 }
 
 /**
