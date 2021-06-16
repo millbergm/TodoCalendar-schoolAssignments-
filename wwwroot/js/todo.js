@@ -86,10 +86,8 @@ function changeStatusOfTodo(i) {
  */
 function getTodosByDate(date) {
   let todosByDate = [];
-  console.log("allTodos", allTodos);
+  
   todosByDate = allTodos.filter((TodoItem) => {
-    console.log("TodoItem", TodoItem.startDate);
-    console.log("date", date);
     getFullDate(TodoItem.startDate) === getFullDate(date);
   });
 
@@ -122,13 +120,10 @@ function populateTodoContainer(date) {
 
   let todos = [];
   if (date) {
-    // console.log("date", date);
     todos = getTodosByDate(date);
   } else {
-    // console.log("hjghfjfjgfhj");
     todos = getAllTodos();
   }
-  // console.log(todos);
 
   for (const todo of todos) {
     todoitem = todotemp.cloneNode(true);
@@ -166,7 +161,6 @@ function todoDelete(event) {
 }
 
 function setId(todotemp, id) {
-  console.log(todotemp, id);
   const headingId = "headingId" + id;
   const collapseId = "collapseId" + id;
   const AccordionId = "AccordionId" + id;
@@ -192,8 +186,7 @@ function setId(todotemp, id) {
 // populateTodoContainer(new Date(2021, 05, 14));
 // Testdata här!
 
-function saveDataToLocalStorage() {
-  console.log("saveDataToLocalStorage", allTodos);
+function saveTodosToLocalStorage() {
   localStorage.setItem("allTodos", JSON.stringify(allTodos));
   localStorage.setItem("nextId", JSON.stringify(nextId));
 }
