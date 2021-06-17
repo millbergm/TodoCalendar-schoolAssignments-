@@ -30,13 +30,13 @@
         <span class="text-white"> TODO-Kalender </span>
     </header>
     <div class="row bg-secondary text-white margin-right-0 flex-fill">
-        <div class="col-12 col-sm-3 col-md-2 padding-right-0">
+        <div class="col-12 col-sm-3 col-md-2 padding-right-0 min-height-0 d-flex flex-column flex-fill">
             <!-- Welcome clock -->
             <div class="day bg-info p-2 mb-2 text-center">
                 <p id="welcome-time">TID</p>
                 <p id="welcome-date" class="text-capitalize">DAGENS DATUM</p>
             </div>
-            <div id="todocontainer" class="bg-success p-2">
+            <div id="todocontainer" class="bg-success p-2 overflow-auto d-flex flex-column flex-fill">
                 <div class="todoitem temp">
                     <div class="d-flex flex-column">
                         <div class="accordion fs-6" id="todoAccordion">
@@ -68,7 +68,8 @@
                                                 data-bs-toggle="button" autocomplete="off">
                                                 <i class="fas fa-check" style="font-size: 16px"></i>
                                             </button>
-                                            <button type="button" class="btn btn-outline-light btn-sm todoEdit" data-bs-toggle="modal" data-bs-target="#editTodo">
+                                            <button type="button" class="btn btn-outline-light btn-sm todoEdit"
+                                                data-bs-toggle="modal" data-bs-target="#editTodo">
                                                 <i class="fas fa-edit" style="font-size: 16px"></i>
                                             </button>
                                             <button type="button" class="btn btn-outline-light btn-sm todoDelete">
