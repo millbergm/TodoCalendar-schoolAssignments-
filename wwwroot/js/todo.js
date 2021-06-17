@@ -161,7 +161,10 @@ function todoEdit(event) {
 
   document.forms["editTodoForm"].elements["editTodoTitle"].value = todo.title;
   document.forms["editTodoForm"].elements["editTodoInfo"].value = todo.info;
-  document.forms["editTodoForm"].elements["editStartDate"].value = new Date(todo.startDate);
+  document.forms["editTodoForm"].elements["editStartDate"].valueAsDate = new Date(todo.startDate);
+  if (todo.startDate < todo.stopDate) {    
+    document.forms["editTodoForm"].elements["editStopDate"].valueAsDate = new Date(todo.stopDate);
+  }
   // document.getElementById("editTodoTitle").setAttribute("value", todo.title);
   // document.getElementById("editTodoInfo").
   // document.getElementById("editStartDate").setAttribute("value", todo.startDate);
