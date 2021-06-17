@@ -3,7 +3,6 @@ var allTodos = new Array();
 function initTodo() {
   fetchDataFromLocalStorage();
   populateTodoContainer();
-  // renderTodoList();
 }
 
 function fetchDataFromLocalStorage() {
@@ -39,13 +38,9 @@ class TodoItem {
     this.stopDate = new Date(stopDate);
     this.isDone = isDone;
   }
-  // constructor(obj) {
-  //     Object.assign(this, obj)
-  // }
 }
 
 var nextId = 1;
-// TODO: Spara i local storage tillsamman med arrayen.
 
 function incrementId() {
   return nextId++;
@@ -60,11 +55,11 @@ function addNewTodo(TodoItem) {
   allTodos.push(TodoItem);
 }
 
-// Testdata!
-// allTodos.length = 0;
-
-function deleteTodoByIndex(i) {
-  allTodos.splice(i, 1);
+function deleteTodoById(id) {
+    let indexToRemove = allTodos.findIndex(obj => obj.id === id);
+    indexToRemove !== -1 ? allTodos.splice(indexToRemove, 1) : console.error("Index doesn't exist.");
+    saveDataToLocalStorage();
+    reloadContent();
 }
 
 function changeStatusOfTodo(i) {
@@ -163,7 +158,8 @@ function todoEdit(event) {
 }
 
 function todoDelete(event) {
-  console.log("todoDelete");
+    const idOfSelectedTodo = event.currentTarget.dataset.id;
+    deleteTodoById(parseInt(idOfSelectedTodo));
 }
 
 function setId(todotemp, id) {
@@ -186,10 +182,6 @@ function setId(todotemp, id) {
   collapseOne.setAttribute("aria-labelledby", headingId);
   collapseOne.dataset.bsParent = "#" + AccordionId;
 }
-
-// Testdata här!
-// populateTodoContainer(new Date(2021, 05, 14));
-// Testdata här!
 
 function saveDataToLocalStorage() {
   localStorage.setItem("allTodos", JSON.stringify(allTodos));
@@ -222,16 +214,4 @@ function handleFormSubmit(event) {
   console.log("handleFormSubmit");
 
   saveDataToLocalStorage();
-  //  renderTodoList();
 }
-
-// function renderTodoList() {
-//   const ul = document.querySelector("ul");
-//   ul.innerText = "";
-
-//   for (var todo of allTodos) {
-//     const li = document.createElement("li");
-//     li.innerText = todo;
-//     ul.append(li);
-//   }
-// }
