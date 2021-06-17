@@ -157,13 +157,16 @@ function todoEdit(event) {
   const id = event.currentTarget.dataset.id;
   const index = allTodos.findIndex(obj => obj.id === parseInt(id));
   var todo = allTodos[index];
-
-  document.getElementById("editTodoTitle").setAttribute("value", todo.title);
-  document.getElementById("editTodoInfo").setAttribute("value", todo.info);
-  document.getElementById("editStartDate").setAttribute("value", todo.startDate);
-  document.getElementById("editStopDate").setAttribute("value", todo.stopDate);
-
   let form = document.getElementById("editTodoForm");
+
+  document.forms["editTodoForm"].elements["editTodoTitle"].value = todo.title;
+  document.forms["editTodoForm"].elements["editTodoInfo"].value = todo.info;
+  document.forms["editTodoForm"].elements["editStartDate"].value = new Date(todo.startDate);
+  // document.getElementById("editTodoTitle").setAttribute("value", todo.title);
+  // document.getElementById("editTodoInfo").
+  // document.getElementById("editStartDate").setAttribute("value", todo.startDate);
+  // document.getElementById("editStopDate").setAttribute("value", todo.stopDate);
+
 
   console.log("Todo ID" + id);
   console.log(todo);
