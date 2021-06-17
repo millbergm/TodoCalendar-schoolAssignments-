@@ -11,7 +11,6 @@ async function setupCalender(year, month) {
     for (let index = 1; index < days[0]["dag i vecka"]; index++) {
       createEmtyDay();
     }
-
     days.forEach((day) => buildADay(day));
 
     for (let index = 7; index > days[days.length - 1]["dag i vecka"]; index--) {
@@ -23,10 +22,8 @@ async function setupCalender(year, month) {
 }
 
 function clearCalendar() {
-  const temp = document.querySelector(".daycontaner.temp").cloneNode(true);
   const calendarDays = document.getElementById("calendar-Days");
   calendarDays.innerHTML = "";
-  calendarDays.append(temp);
 }
 
 /*
@@ -44,9 +41,9 @@ function buildADay(dayinfo) {
   const datum = dayinfo.datum.split("-");
 
   const daycontaner = document
-    .querySelector(".daycontaner.temp")
-    .cloneNode(true);
-  daycontaner.classList.remove("temp");
+    .querySelector("#daycontanertemp")
+    .content.cloneNode(true)
+    .querySelector(".daycontaner");
 
   if (state.cutentSelektedDay === dayinfo["datum"]) {
     daycontaner.classList.add("selected");

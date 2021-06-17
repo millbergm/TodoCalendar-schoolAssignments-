@@ -26,23 +26,23 @@
 </head>
 
 <body>
-    <header class="p-1 bg-primary text-center fs-1 margin-right-0">
+    <header class="p-1 text-center fs-1 margin-right-0 navy-blue">
         <span class="text-white"> TODO-Kalender </span>
     </header>
     <div class="row bg-secondary text-white margin-right-0 flex-fill">
         <div class="col-12 col-sm-3 col-md-2 padding-right-0 min-height-0 d-flex flex-column flex-fill">
             <!-- Welcome clock -->
-            <div class="day bg-info p-2 mb-2 text-center">
+            <div class="day flower-blue p-2 pb-3 text-center">
                 <p id="welcome-time">TID</p>
                 <p id="welcome-date" class="text-capitalize">DAGENS DATUM</p>
             </div>
-            <div id="todocontainer" class="bg-success p-2 overflow-auto d-flex flex-column flex-fill">
+            <div id="todocontainer" class="cerulean-crayola p-2 overflow-auto d-flex flex-column flex-fill">
                 <div class="todoitem temp">
                     <div class="d-flex flex-column">
                         <div class="accordion fs-6" id="todoAccordion">
-                            <div class="accordion-item bg-success">
+                            <div class="accordion-item  ">
                                 <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button bg-success col" type="button"
+                                    <button class="accordion-button bg-success blue-green col" type="button"
                                         data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false"
                                         aria-controls="collapseOne">
                                         <p>TODO-Titel</p>
@@ -125,7 +125,7 @@
                 </div>
             </div>
             <!-- Button trigger modal -->
-            <button class="btn btn-primary circle add-todo" data-bs-toggle="modal" data-bs-target="#newTodo">
+            <button class="btn btn-primary circle add-todo z-top" data-bs-toggle="modal" data-bs-target="#newTodo">
                 <i class="fas fa-plus-circle"></i>
             </button>
             <!-- Modal -->
@@ -170,14 +170,14 @@
                 </div>
             </div>
         </div>
-        <div class="d-none d-sm-flex flex-column col-sm-9 col-md-10 bg-success padding-right-0 flex-fill">
+        <div class="d-none d-sm-flex flex-column col-sm-9 col-md-10 padding-right-0 flex-fill">
             <div class="row margin-right-0">
                 <div class="col-12 padding-0">
                     <div class="
                 d-flex
                 justify-content-between
                 align-items-center
-                bg-primary
+                flower-blue
                 fs-5
                 p-2
                 text-white
@@ -198,6 +198,7 @@
             row-cols-7
             margin-right-0
             text-center
+            star-command-blue
           ">
                 <p class="col">Måndag</p>
                 <p class="col">Tisdag</p>
@@ -207,19 +208,23 @@
                 <p class="col">Lördag</p>
                 <p class="col">Söndag</p>
             </div>
-            <div id="calendar-Days" class="row justify-content-center row-cols-7 margin-right-0 flex-fill">
-                <div class="daycontaner temp">
-                    <div class="row">
-                        <div class="col">
-                            <div class="day-Nr">1</div>
-                            <div class="todo-nr">0</div>
-                        </div>
-                        <div class="day-red-day col">sveriges nationaldag</div>
-                    </div>
-                </div>
+            <div id="calendar-Days"
+                class="row justify-content-center row-cols-7 margin-right-0 flex-fill sky-blue-crayola">
+
             </div>
         </div>
     </div>
+    </div>
+    <template id="daycontanertemp">
+        <div class="daycontaner">
+            <div class="row">
+                <div class="col">
+                    <div class="day-Nr">1</div>
+                    <div class="todo-nr">0</div>
+                </div>
+                <div class="day-red-day col">sveriges nationaldag</div>
+            </div>
+    </template>
 </body>
 
 </html>
