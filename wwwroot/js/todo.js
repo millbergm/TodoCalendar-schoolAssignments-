@@ -211,7 +211,7 @@ function handleFormSubmit(event) {
   document.getElementById("startDate").value = "";
   document.getElementById("stopDate").value = "";
 
-  console.log("handleFormSubmit");
+  // console.log("handleFormSubmit");
 
   saveDataToLocalStorage();
 }
