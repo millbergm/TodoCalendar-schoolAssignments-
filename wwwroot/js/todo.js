@@ -49,6 +49,8 @@ function incrementId() {
 function addFormEventListener() {
   let form = document.getElementById("newTodoForm");
   form.addEventListener("submit", handleFormSubmit);
+  let form1 = document.getElementById("editTodoForm");
+  form1.addEventListener("submit", handleEditFormSubmit);
 }
 
 function addNewTodo(TodoItem) {
@@ -154,7 +156,44 @@ function todoDone(event) {
 }
 
 function todoEdit(event) {
-  console.log("todoEdit");
+  const id = event.currentTarget.dataset.id;
+  const index = allTodos.findIndex(obj => obj.id === parseInt(id));
+  var todo = allTodos[index];
+  
+  document.forms["editTodoForm"].elements["todoId"].value = todo.id;
+  document.forms["editTodoForm"].elements["editTodoTitle"].value = todo.title;
+  document.forms["editTodoForm"].elements["editTodoInfo"].value = todo.info;
+  document.forms["editTodoForm"].elements["editStartDate"].valueAsDate = new Date(todo.startDate);
+  if (todo.startDate < todo.stopDate) {    
+    document.forms["editTodoForm"].elements["editStopDate"].valueAsDate = new Date(todo.stopDate);
+  }
+
+  console.log("Todo ID" + id);
+  console.log(todo);
+  console.log(editTodoTitle);
+}
+
+/**
+ * @param {Event} event
+ */
+function handleEditFormSubmit(event){
+  event.preventDefault();
+
+  const todoId = document.getElementById("todoId").value;
+  const todoTitle = document.getElementById("editTodoTitle").value;
+  const todoInfo = document.getElementById("editTodoInfo").value;
+  const startDate = new Date(document.getElementById("editStartDate").value);
+  const stopDate = new Date(document.getElementById("editStopDate").value);
+
+  const index = allTodos.findIndex(obj => obj.id === parseInt(todoId));
+  var todo = allTodos[index];
+
+  todo.title = todoTitle;
+  todo.info = todoInfo;
+  todo.startDate = startDate;
+  todo.stopDate = stopDate;
+
+  saveDataToLocalStorage();
 }
 
 function todoDelete(event) {
@@ -210,8 +249,6 @@ function handleFormSubmit(event) {
   todoInfo.value = "";
   document.getElementById("startDate").value = "";
   document.getElementById("stopDate").value = "";
-
-  console.log("handleFormSubmit");
-
+  
   saveDataToLocalStorage();
 }

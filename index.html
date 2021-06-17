@@ -88,35 +88,35 @@
                     <div class="modal-content bg-secondary">
                         <div class="modal-header">
                             <h5 class="modal-title" id="editTodoLabel">Redigera ToDo</h5>
-                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                            
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form id="editTodoForm">
                                 <div class="mb-3">
-                                    <label for="todoTitle" class="form-label">Titel</label>
-                                    <input type="text" class="form-control" id="todoTitle" required />
-                                    <!-- <div class="invalid-feedback">
-                                        Ange en titel för din ToDo.
-                                    </div> -->
+                                    <label for="todoId" class="form-label">ID</label>
+                                    <input class="form-control" type="text" id="todoId" readonly />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="todoInfo" class="form-label">Information</label>
-                                    <textarea class="form-control" id="todoInfo" rows="3"></textarea>
+                                    <label for="editTodoTitle" class="form-label">Titel</label>
+                                    <input type="text" class="form-control" id="editTodoTitle" required />                                    
                                 </div>
                                 <div class="mb-3">
-                                    <label for="startDate" class="form-label">Startdatum</label>
-                                    <input type="date" class="form-control" id="startDate" required />
-                                    <!-- <div class="invalid-feedback">Ett datum måste väljas.</div> -->
+                                    <label for="editTodoInfo" class="form-label">Information</label>
+                                    <textarea class="form-control" id="editTodoInfo" rows="3"></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="stopDate" class="form-label">Slutdatum</label>
-                                    <input type="date" class="form-control" id="stopDate" />
+                                    <label for="editStartDate" class="form-label">Startdatum</label>
+                                    <input type="date" class="form-control" id="editStartDate" required />                                    
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editStopDate" class="form-label">Slutdatum</label>
+                                    <input type="date" class="form-control" id="editStopDate" />
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="reloadContent()">
                                         Close
                                     </button>
-                                    <button type="submit" id="my_button" class="btn btn-primary">Submit</button>
+                                    <button type="submit"  class="btn btn-primary">Submit</button>
                                 </div>
                             </form>
                         </div>
@@ -136,6 +136,7 @@
                             <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                         </div>
                         <div class="modal-body">
+                            <!--  -->
                             <form id="newTodoForm">
                                 <div class="mb-3">
                                     <label for="todoTitle" class="form-label">Titel</label>
@@ -158,7 +159,7 @@
                                     <input type="date" class="form-control" id="stopDate" />
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="reloadContent()">
                                         Close
                                     </button>
                                     <button type="submit" id="my_button" class="btn btn-primary">Submit</button>
