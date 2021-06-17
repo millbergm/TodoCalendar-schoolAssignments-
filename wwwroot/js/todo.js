@@ -154,7 +154,20 @@ function todoDone(event) {
 }
 
 function todoEdit(event) {
-  console.log("todoEdit");
+  const id = event.currentTarget.dataset.id;
+  const index = allTodos.findIndex(obj => obj.id === parseInt(id));
+  var todo = allTodos[index];
+
+  document.getElementById("editTodoTitle").setAttribute("value", todo.title);
+  document.getElementById("editTodoInfo").setAttribute("value", todo.info);
+  document.getElementById("editStartDate").setAttribute("value", todo.startDate);
+  document.getElementById("editStopDate").setAttribute("value", todo.stopDate);
+
+  let form = document.getElementById("editTodoForm");
+
+  console.log("Todo ID" + id);
+  console.log(todo);
+  console.log(editTodoTitle);
 }
 
 function todoDelete(event) {
@@ -210,8 +223,6 @@ function handleFormSubmit(event) {
   todoInfo.value = "";
   document.getElementById("startDate").value = "";
   document.getElementById("stopDate").value = "";
-
-  // console.log("handleFormSubmit");
-
+  
   saveDataToLocalStorage();
 }

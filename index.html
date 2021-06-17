@@ -91,7 +91,7 @@
                             
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form id="editTodoForm">
                                 <div class="mb-3">
                                     <label for="editTodoTitle" class="form-label">Titel</label>
                                     <input type="text" class="form-control" id="editTodoTitle" required />
@@ -111,7 +111,7 @@
                                     <input type="date" class="form-control" id="editStopDate" />
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="reloadContent()">
                                         Close
                                     </button>
                                     <button type="submit"  class="btn btn-primary">Submit</button>
@@ -157,7 +157,7 @@
                                     <input type="date" class="form-control" id="stopDate" />
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="reloadContent()">
                                         Close
                                     </button>
                                     <button type="submit" id="my_button" class="btn btn-primary">Submit</button>
