@@ -173,6 +173,11 @@ function todoEdit(event) {
   console.log(editTodoTitle);
 }
 
+function todoDelete(event) {
+    const idOfSelectedTodo = event.currentTarget.dataset.id;
+    deleteTodoById(parseInt(idOfSelectedTodo));
+}
+
 /**
  * @param {Event} event
  */
@@ -194,12 +199,9 @@ function handleEditFormSubmit(event){
   todo.stopDate = stopDate;
 
   saveDataToLocalStorage();
+  reloadContent()
 }
 
-function todoDelete(event) {
-    const idOfSelectedTodo = event.currentTarget.dataset.id;
-    deleteTodoById(parseInt(idOfSelectedTodo));
-}
 
 function setId(todotemp, id) {
   const headingId = "headingId" + id;
@@ -262,4 +264,5 @@ function handleFormSubmit(event) {
   document.getElementById("stopDate").value = "";
   
   saveDataToLocalStorage();
+  reloadContent()
 }
