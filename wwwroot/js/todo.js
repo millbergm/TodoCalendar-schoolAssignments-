@@ -236,6 +236,17 @@ function handleFormSubmit(event) {
   var todoInfo = document.getElementById("todoInfo");
   var startDate = new Date(document.getElementById("startDate").value);
   var stopDate = new Date(document.getElementById("stopDate").value);
+
+  console.log(document.getElementById("stopDate").value);
+
+  if (startDate > stopDate) {
+    // stopDate = new Date(0000-00-00);
+    stopDate = new Date(document.getElementById("startDate").value);
+  }
+  // if (document.getElementById("stopDate").value === null) {
+  //   stopDate = new Date(document.getElementById("startDate").value);
+  // }
+
   var todoItem = new TodoItem(
     0,
     todoTitle.value,
