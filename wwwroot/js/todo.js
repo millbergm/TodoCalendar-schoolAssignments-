@@ -136,8 +136,8 @@ function populateTodoContainer(date) {
     todoitem.classList.remove("temp");
     todoitem.querySelector(".accordion-header p").innerHTML = todo.title;
     todoitem.querySelector(".todoInfo").innerHTML = todo.info;
-    todoitem.querySelector(".todoStartDate").innerHTML = todo.startDate;
-    todoitem.querySelector(".todoEndDate").innerHTML = todo.stopDate;
+    todoitem.querySelector(".todoStartDate").innerHTML = todo.startDate.toDateString();
+    todoitem.querySelector(".todoEndDate").innerHTML = todo.stopDate.toDateString();
 
     todoitem.querySelector(".todoDone").dataset.id = todo.id;
     todoitem.querySelector(".todoEdit").dataset.id = todo.id;
