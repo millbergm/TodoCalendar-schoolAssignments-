@@ -51,6 +51,22 @@ function addFormEventListener() {
   form.addEventListener("submit", handleFormSubmit);
   let form1 = document.getElementById("editTodoForm");
   form1.addEventListener("submit", handleEditFormSubmit);
+  let inputstartdate = document.getElementById("startDate");
+  inputstartdate.addEventListener("input", checkValidDate);
+}
+
+/**
+ * @param {Event} event
+ */
+function checkValidDate(event){
+  event.target.valueAsDate;
+
+  if (event.target.valueAsDate < new Date()) {
+    console.log("invalid date")
+    
+    let form = document.getElementById("newTodoForm");
+    form.classList.add("needs-validation", "was-validated")
+  }
 }
 
 function addNewTodo(TodoItem) {
