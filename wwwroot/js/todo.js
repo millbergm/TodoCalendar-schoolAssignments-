@@ -243,9 +243,9 @@ function handleFormSubmit(event) {
     // stopDate = new Date(0000-00-00);
     stopDate = new Date(document.getElementById("startDate").value);
   }
-  // if (document.getElementById("stopDate").value === null) {
-  //   stopDate = new Date(document.getElementById("startDate").value);
-  // }
+  if (!Date.parse(stopDate)) {
+    stopDate = new Date(document.getElementById("startDate").value);
+  }
 
   var todoItem = new TodoItem(
     0,
