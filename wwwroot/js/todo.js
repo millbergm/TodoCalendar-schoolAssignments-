@@ -173,6 +173,11 @@ function todoEdit(event) {
   console.log(editTodoTitle);
 }
 
+function todoDelete(event) {
+    const idOfSelectedTodo = event.currentTarget.dataset.id;
+    deleteTodoById(parseInt(idOfSelectedTodo));
+}
+
 /**
  * @param {Event} event
  */
@@ -194,12 +199,9 @@ function handleEditFormSubmit(event){
   todo.stopDate = stopDate;
 
   saveDataToLocalStorage();
+  reloadContent()
 }
 
-function todoDelete(event) {
-    const idOfSelectedTodo = event.currentTarget.dataset.id;
-    deleteTodoById(parseInt(idOfSelectedTodo));
-}
 
 function setId(todotemp, id) {
   const headingId = "headingId" + id;
@@ -236,6 +238,17 @@ function handleFormSubmit(event) {
   var todoInfo = document.getElementById("todoInfo");
   var startDate = new Date(document.getElementById("startDate").value);
   var stopDate = new Date(document.getElementById("stopDate").value);
+
+  console.log(document.getElementById("stopDate").value);
+
+  if (startDate > stopDate) {
+    // stopDate = new Date(0000-00-00);
+    stopDate = new Date(document.getElementById("startDate").value);
+  }
+  if (!Date.parse(stopDate)) {
+    stopDate = new Date(document.getElementById("startDate").value);
+  }
+
   var todoItem = new TodoItem(
     0,
     todoTitle.value,
@@ -251,4 +264,5 @@ function handleFormSubmit(event) {
   document.getElementById("stopDate").value = "";
   
   saveDataToLocalStorage();
+  reloadContent()
 }
