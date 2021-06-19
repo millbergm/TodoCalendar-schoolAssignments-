@@ -174,6 +174,7 @@ function todoEdit(event) {
   if (todo.startDate < todo.stopDate) {    
     document.forms["editTodoForm"].elements["editStopDate"].valueAsDate = new Date(todo.stopDate);
   }
+  document.forms["editTodoForm"].elements["toggleIsDone"].checked = todo.isDone;
 
   console.log("Todo ID" + id);
   console.log(todo);
@@ -196,6 +197,7 @@ function handleEditFormSubmit(event){
   const todoInfo = document.getElementById("editTodoInfo").value;
   const startDate = new Date(document.getElementById("editStartDate").value);
   const stopDate = new Date(document.getElementById("editStopDate").value);
+  const isDone = document.getElementById("toggleIsDone").checked;
 
   const index = allTodos.findIndex(obj => obj.id === parseInt(todoId));
   var todo = allTodos[index];
@@ -204,6 +206,7 @@ function handleEditFormSubmit(event){
   todo.info = todoInfo;
   todo.startDate = startDate;
   todo.stopDate = stopDate;
+  todo.isDone = isDone;
 
   saveDataToLocalStorage();
   reloadContent()
