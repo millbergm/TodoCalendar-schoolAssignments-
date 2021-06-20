@@ -64,14 +64,19 @@ function deleteTodoById(id) {
     reloadContent();
 }
 
-function changeStatusOfTodo(i) {
-  var todo = allTodos[i];
-
-  if (todo.isDone == false) {
-    todo.isDone = true;
-  } else {
-    todo.isDone = false;
+function toggleStatusOfTodo(id) {
+  let indexToToggle = allTodos.findIndex(obj => obj.id === id);
+  if (indexToToggle !== -1 && allTodos[indexToToggle].isDone === false) {
+    allTodos[indexToToggle].isDone = true;
   }
+  else if (indexToToggle !== -1 && allTodos[indexToToggle].isDone === true) {
+    allTodos[indexToToggle].isDone = false;
+  }
+  else {
+    console.error("Index is not available.");
+  }
+
+  saveDataToLocalStorage();
 }
 
 /**
@@ -138,6 +143,7 @@ function populateTodoContainer(date) {
     todoitem.querySelector(".todoInfo").innerHTML = todo.info;
     todoitem.querySelector(".todoStartDate").innerHTML = todo.startDate.toDateString();
     todoitem.querySelector(".todoEndDate").innerHTML = todo.stopDate.toDateString();
+    todoitem.querySelector(".todoDone").checked = todo.isDone;
 
     todoitem.querySelector(".todoDone").dataset.id = todo.id;
     todoitem.querySelector(".todoEdit").dataset.id = todo.id;
@@ -152,7 +158,8 @@ function populateTodoContainer(date) {
 }
 
 function todoDone(event) {
-  console.log("todoDone");
+  const idOfSelectedTodo = event.currentTarget.dataset.id;
+  toggleStatusOfTodo(parseInt(idOfSelectedTodo));
 }
 
 function todoEdit(event) {
@@ -167,6 +174,7 @@ function todoEdit(event) {
   if (todo.startDate < todo.stopDate) {    
     document.forms["editTodoForm"].elements["editStopDate"].valueAsDate = new Date(todo.stopDate);
   }
+  document.forms["editTodoForm"].elements["toggleIsDone"].checked = todo.isDone;
 
   console.log("Todo ID" + id);
   console.log(todo);
@@ -189,6 +197,7 @@ function handleEditFormSubmit(event){
   const todoInfo = document.getElementById("editTodoInfo").value;
   const startDate = new Date(document.getElementById("editStartDate").value);
   const stopDate = new Date(document.getElementById("editStopDate").value);
+  const isDone = document.getElementById("toggleIsDone").checked;
 
   const index = allTodos.findIndex(obj => obj.id === parseInt(todoId));
   var todo = allTodos[index];
@@ -197,6 +206,7 @@ function handleEditFormSubmit(event){
   todo.info = todoInfo;
   todo.startDate = startDate;
   todo.stopDate = stopDate;
+  todo.isDone = isDone;
 
   saveDataToLocalStorage();
   reloadContent()

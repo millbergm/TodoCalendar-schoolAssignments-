@@ -64,10 +64,9 @@
                                         </div>
                                         <div class="btn-group btn-group-sm todobuttons" role="group"
                                             aria-label="TODO Options">
-                                            <button type="button" class="btn btn-outline-light btn-sm todoDone"
-                                                data-bs-toggle="button" autocomplete="off">
-                                                <i class="fas fa-check" style="font-size: 16px"></i>
-                                            </button>
+                                            <label type="button" class="btn btn-outline-light btn-sm">
+                                                <input type="checkbox" class="todoDone">
+                                            </label>
                                             <button type="button" class="btn btn-outline-light btn-sm todoEdit" data-bs-toggle="modal" data-bs-target="#editTodo">
                                                 <i class="fas fa-edit" style="font-size: 16px"></i>
                                             </button>
@@ -112,6 +111,11 @@
                                     <label for="editStopDate" class="form-label">Slutdatum</label>
                                     <input type="date" class="form-control" id="editStopDate" />
                                 </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="toggleIsDone" />
+                                    <label class="form-check-label" for="toggleIsDone">Avklarad</label>
+                                </div>
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="reloadContent()">
                                         Close
