@@ -265,20 +265,23 @@ function handleFormSubmit(event) {
     stopDate = new Date(document.getElementById("startDate").value);
   }
 
-  var todoItem = new TodoItem(
-    0,
-    todoTitle.value,
-    todoInfo.value,
-    startDate,
-    stopDate,
-    false
-  );
-  allTodos.push(todoItem);
+  if (startDate.toDateString() <= new Date().toDateString()) {    
+    var todoItem = new TodoItem(
+      0,
+      todoTitle.value,
+      todoInfo.value,
+      startDate,
+      stopDate,
+      false
+    );
+
+    allTodos.push(todoItem);
+    saveDataToLocalStorage();
+  }
   todoTitle.value = "";
   todoInfo.value = "";
   document.getElementById("startDate").value = "";
   document.getElementById("stopDate").value = "";
   
-  saveDataToLocalStorage();
   reloadContent()
 }
