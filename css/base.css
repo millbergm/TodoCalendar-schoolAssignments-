@@ -39,7 +39,7 @@ body {
 }
 
 .daycontaner {
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: black;
   background-color: whitesmoke;
   border: solid 1px black;
@@ -54,6 +54,14 @@ body {
 .red .day-Nr,
 .red .day-red-day {
   color: red;
+}
+.day-Nr {
+  font-size: 1.3rem;
+}
+.todo-nr {
+  background-color: cadetblue;
+  height: 1.3rem;
+  width: 1.3rem;
 }
 
 .temp {
