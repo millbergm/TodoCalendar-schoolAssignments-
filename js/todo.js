@@ -310,7 +310,7 @@ function handleFormSubmit(event) {
   }
   todoTitle.value = "";
   todoInfo.value = "";
-  document.getElementById("startDate").value = new Date();
+  document.getElementById("startDate").value = "";
   document.getElementById("stopDate").value = "";
   
   reloadContent()
