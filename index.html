@@ -30,7 +30,7 @@
         <span class="text-white"> TODO-Kalender </span>
     </header>
     <div class="row bg-secondary text-white margin-right-0 flex-fill">
-        <div class="col-12 col-sm-3 col-md-2 padding-right-0">
+        <div class="col-12 col-sm-4 col-md-3 col-lg-2 padding-right-0">
             <!-- Welcome clock -->
             <div class="day bg-info p-2 mb-2 text-center text-dark">
                 <p class="fs-2" id="welcome-time">TID</p>
@@ -42,24 +42,26 @@
                         <div class="accordion fs-6" id="todoAccordion">
                             <div class="accordion-item bg-secondary">
                                 <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button bg-info col" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false"
-                                        aria-controls="collapseOne">
+                                    <button class="accordion-button bg-info col" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                         <p>TODO-Titel</p>
                                     </button>
                                 </h2>
                                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
                                     data-bs-parent="#todoAccordion">
-                                    <div class="accordion-body bg-secondary d-flex flex-column border border-dark border-2 rounded">
+                                    <div
+                                        class="accordion-body bg-secondary d-flex flex-column border border-dark border-2 rounded">
                                         <div class="todoInfo border border-white border-1 rounded">
                                             <p>Todo-Info</p>
                                         </div>
                                         <div class="d-flex flex-row justify-content-between">
                                             <div>
-                                                <p class="todoStartDate border border-white border-1 rounded">StartDatum</p>
+                                                <p class="todoStartDate border border-white border-1 rounded">StartDatum
+                                                </p>
                                             </div>
                                             <div>
-                                                <p class="todoEndDate border border-white border-1 rounded">SlutDatum</p>
+                                                <p class="todoEndDate border border-white border-1 rounded">SlutDatum
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="btn-group btn-group-sm todobuttons" role="group"
@@ -67,7 +69,8 @@
                                             <label type="button" class="btn btn-outline-light btn-sm">
                                                 <input type="checkbox" class="todoDone">
                                             </label>
-                                            <button type="button" class="btn btn-outline-light btn-sm todoEdit" data-bs-toggle="modal" data-bs-target="#editTodo">
+                                            <button type="button" class="btn btn-outline-light btn-sm todoEdit"
+                                                data-bs-toggle="modal" data-bs-target="#editTodo">
                                                 <i class="fas fa-edit" style="font-size: 16px"></i>
                                             </button>
                                             <button type="button" class="btn btn-outline-light btn-sm todoDelete">
@@ -87,7 +90,7 @@
                     <div class="modal-content bg-secondary">
                         <div class="modal-header">
                             <h5 class="modal-title" id="editTodoLabel">Redigera ToDo</h5>
-                            
+
                         </div>
                         <div class="modal-body">
                             <form id="editTodoForm">
@@ -97,7 +100,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="editTodoTitle" class="form-label">Titel</label>
-                                    <input type="text" class="form-control" id="editTodoTitle" required />                                    
+                                    <input type="text" class="form-control" id="editTodoTitle" required />
                                 </div>
                                 <div class="mb-3">
                                     <label for="editTodoInfo" class="form-label">Information</label>
@@ -105,7 +108,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="editStartDate" class="form-label">Startdatum</label>
-                                    <input type="date" class="form-control" id="editStartDate" required />                                    
+                                    <input type="date" class="form-control" id="editStartDate" required />
                                 </div>
                                 <div class="mb-3">
                                     <label for="editStopDate" class="form-label">Slutdatum</label>
@@ -117,10 +120,11 @@
                                 </div>
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="reloadContent()">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                        onclick="reloadContent()">
                                         Close
                                     </button>
-                                    <button type="submit"  class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </form>
                         </div>
@@ -163,7 +167,8 @@
                                     <input type="date" class="form-control" id="stopDate" />
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="reloadContent()">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                        onclick="reloadContent()">
                                         Close
                                     </button>
                                     <button type="submit" id="my_button" class="btn btn-primary">Submit</button>
@@ -174,7 +179,7 @@
                 </div>
             </div>
         </div>
-        <div class="d-none d-sm-flex flex-column col-sm-9 col-md-10 bg-success padding-right-0 flex-fill">
+        <div class="d-none d-sm-flex flex-column col-sm-8 col-md-9 col-lg-10 bg-success padding-right-0 flex-fill">
             <div class="row margin-right-0">
                 <div class="col-12 padding-0">
                     <div class="
