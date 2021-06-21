@@ -206,46 +206,14 @@ function todoEdit(event) {
   document.forms["editTodoForm"].elements["editTodoTitle"].value = todo.title;
   document.forms["editTodoForm"].elements["editTodoInfo"].value = todo.info;
   document.forms["editTodoForm"].elements["editStartDate"].valueAsDate = new Date(todo.startDate);
-  if (todo.startDate < todo.stopDate) {    
-    document.forms["editTodoForm"].elements["editStopDate"].valueAsDate = new Date(todo.stopDate);
-  }
-  document.forms["editTodoForm"].elements["toggleIsDone"].checked = todo.isDone;
-
-  console.log("Todo ID" + id);
-  console.log(todo);
-  console.log(editTodoTitle);
+  document.forms["editTodoForm"].elements["editStopDate"].valueAsDate = new Date(todo.stopDate);
+  document.forms["editTodoForm"].elements["toggleIsDone"].checked = todo.isDone;  
 }
 
 function todoDelete(event) {
     const idOfSelectedTodo = event.currentTarget.dataset.id;
     deleteTodoById(parseInt(idOfSelectedTodo));
 }
-
-/**
- * @param {Event} event
- */
-// function handleEditFormSubmit(event){
-//   event.preventDefault();
-
-//   const todoId = document.getElementById("todoId").value;
-//   const todoTitle = document.getElementById("editTodoTitle").value;
-//   const todoInfo = document.getElementById("editTodoInfo").value;
-//   const startDate = new Date(document.getElementById("editStartDate").value);
-//   const stopDate = new Date(document.getElementById("editStopDate").value);
-//   const isDone = document.getElementById("toggleIsDone").checked;
-
-//   const index = allTodos.findIndex(obj => obj.id === parseInt(todoId));
-//   var todo = allTodos[index];
-
-//   todo.title = todoTitle;
-//   todo.info = todoInfo;
-//   todo.startDate = startDate;
-//   todo.stopDate = stopDate;
-//   todo.isDone = isDone;
-
-//   saveDataToLocalStorage();
-//   reloadContent()
-// }
 
 function setId(todotemp, id) {
   const headingId = "headingId" + id;
@@ -342,7 +310,7 @@ function handleFormSubmit(event) {
   }
   todoTitle.value = "";
   todoInfo.value = "";
-  document.getElementById("startDate").value = new Date();
+  document.getElementById("startDate").value = "";
   document.getElementById("stopDate").value = "";
   
   reloadContent()
