@@ -23,10 +23,8 @@ async function setupCalender(year, month) {
 }
 
 function clearCalendar() {
-  const temp = document.querySelector(".daycontaner.temp").cloneNode(true);
   const calendarDays = document.getElementById("calendar-Days");
   calendarDays.innerHTML = "";
-  calendarDays.append(temp);
 }
 
 /*
@@ -44,9 +42,9 @@ function buildADay(dayinfo) {
   const datum = dayinfo.datum.split("-");
 
   const daycontaner = document
-    .querySelector(".daycontaner.temp")
-    .cloneNode(true);
-  daycontaner.classList.remove("temp");
+    .querySelector("#daycontanertemp")
+    .content.cloneNode(true)
+    .querySelector(".daycontaner");
 
   if (state.cutentSelektedDay === dayinfo["datum"]) {
     daycontaner.classList.add("selected");
@@ -96,7 +94,6 @@ function setupClickEventOnDay() {
   const allDays = document.querySelectorAll(
     "div.daycontaner[data-calenderdate]"
   );
-  let cutentSelektedDay = null;
   allDays.forEach((day) => {
     day.addEventListener("click", (event) => {
       const data = event.currentTarget.dataset.calenderdate;
