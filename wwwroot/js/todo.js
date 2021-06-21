@@ -49,10 +49,15 @@ function incrementId() {
 function addFormEventListener() {
   let form = document.getElementById("newTodoForm");
   form.addEventListener("submit", handleFormSubmit);
+
   let form1 = document.getElementById("editTodoForm");
   form1.addEventListener("submit", handleEditFormSubmit);
-  let inputstartdate = document.getElementById("startDate");
-  inputstartdate.addEventListener("input", checkValidDate);
+
+  let inputStartDate = document.getElementById("startDate");
+  inputStartDate.addEventListener("input", checkValidDate);
+
+  let editInputStartDate = document.getElementById("editStartDate");
+  editInputStartDate.addEventListener("input", checkValidDateOnEdit);
 }
 
 /**
@@ -65,6 +70,20 @@ function checkValidDate(event){
     console.log("invalid date")
     
     let form = document.getElementById("newTodoForm");
+    form.classList.add("needs-validation", "was-validated")
+  }
+}
+
+/**
+ * @param {Event} event
+ */
+ function checkValidDateOnEdit(event){
+  event.target.valueAsDate;
+
+  if (event.target.valueAsDate < new Date()) {
+    console.log("invalid date")
+    
+    let form = document.getElementById("editTodoForm");
     form.classList.add("needs-validation", "was-validated")
   }
 }
@@ -194,47 +213,22 @@ function todoDelete(event) {
     deleteTodoById(parseInt(idOfSelectedTodo));
 }
 
-/**
- * @param {Event} event
- */
-function handleEditFormSubmit(event){
-  event.preventDefault();
-
-  const todoId = document.getElementById("todoId").value;
-  const todoTitle = document.getElementById("editTodoTitle").value;
-  const todoInfo = document.getElementById("editTodoInfo").value;
-  const startDate = new Date(document.getElementById("editStartDate").value);
-  const stopDate = new Date(document.getElementById("editStopDate").value);
-
-  const index = allTodos.findIndex(obj => obj.id === parseInt(todoId));
-  var todo = allTodos[index];
-
-  todo.title = todoTitle;
-  todo.info = todoInfo;
-  todo.startDate = startDate;
-  todo.stopDate = stopDate;
-
-  saveDataToLocalStorage();
-  reloadContent()
-}
-
-
 function setId(todotemp, id) {
   const headingId = "headingId" + id;
   const collapseId = "collapseId" + id;
   const AccordionId = "AccordionId" + id;
-
+  
   const todoAccordion = todotemp.querySelector("#todoAccordion");
   const headingOne = todotemp.querySelector("#headingOne");
   const headingOneButton = headingOne.querySelector("button");
   const collapseOne = todotemp.querySelector("#collapseOne");
-
+  
   todoAccordion.id = AccordionId;
   headingOne.id = headingId;
-
+  
   headingOneButton.dataset.bsTarget = "#" + collapseId;
   headingOneButton.setAttribute("aria-controls", collapseId);
-
+  
   collapseOne.id = collapseId;
   collapseOne.setAttribute("aria-labelledby", headingId);
   collapseOne.dataset.bsParent = "#" + AccordionId;
@@ -248,6 +242,41 @@ function saveDataToLocalStorage() {
 /**
  * @param {Event} event
  */
+function handleEditFormSubmit(event){
+  event.preventDefault();
+
+  const todoId = document.getElementById("todoId").value;
+  const todoTitle = document.getElementById("editTodoTitle").value;
+  const todoInfo = document.getElementById("editTodoInfo").value;
+  const startDate = new Date(document.getElementById("editStartDate").value);
+  var stopDate = new Date(document.getElementById("editStopDate").value);
+
+  const index = allTodos.findIndex(obj => obj.id === parseInt(todoId));
+  var todo = allTodos[index];
+  
+  if (document.getElementById("editStartDate").valueAsDate > document.getElementById("editStopDate").valueAsDate) {    
+    stopDate = new Date(document.getElementById("editStartDate").value);
+  }
+  if (!Date.parse(stopDate)) {
+    stopDate = new Date(document.getElementById("editStartDate").value);
+  }
+
+  if (document.getElementById("editStartDate").valueAsDate >= new Date()) {
+
+    todo.title = todoTitle;
+    todo.info = todoInfo;
+    todo.startDate = startDate;
+    todo.stopDate = stopDate;
+
+    saveDataToLocalStorage();
+  }
+
+  reloadContent()
+}
+
+/**
+ * @param {Event} event
+ */
 function handleFormSubmit(event) {
   event.preventDefault();
   var todoTitle = document.getElementById("todoTitle");
@@ -255,17 +284,14 @@ function handleFormSubmit(event) {
   var startDate = new Date(document.getElementById("startDate").value);
   var stopDate = new Date(document.getElementById("stopDate").value);
 
-  console.log(document.getElementById("stopDate").value);
-
-  if (startDate > stopDate) {
-    // stopDate = new Date(0000-00-00);
+  if (startDate > stopDate) {    
     stopDate = new Date(document.getElementById("startDate").value);
   }
   if (!Date.parse(stopDate)) {
     stopDate = new Date(document.getElementById("startDate").value);
   }
 
-  if (startDate.toDateString() <= new Date().toDateString()) {    
+  if (document.getElementById("startDate").valueAsDate >= new Date()) {    
     var todoItem = new TodoItem(
       0,
       todoTitle.value,
@@ -280,7 +306,7 @@ function handleFormSubmit(event) {
   }
   todoTitle.value = "";
   todoInfo.value = "";
-  document.getElementById("startDate").value = "";
+  document.getElementById("startDate").value = new Date();
   document.getElementById("stopDate").value = "";
   
   reloadContent()
