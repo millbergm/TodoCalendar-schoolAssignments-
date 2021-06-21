@@ -94,7 +94,6 @@ function setupClickEventOnDay() {
   const allDays = document.querySelectorAll(
     "div.daycontaner[data-calenderdate]"
   );
-  let cutentSelektedDay = null;
   allDays.forEach((day) => {
     day.addEventListener("click", (event) => {
       const data = event.currentTarget.dataset.calenderdate;
