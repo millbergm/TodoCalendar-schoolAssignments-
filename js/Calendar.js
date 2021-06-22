@@ -28,15 +28,16 @@ function clearCalendar() {
 }
 
 /*
-<div class="daycontaner col" data-calenderDate="">
-    <div class="row">
-        <div class="col">
-            <div class="day-Nr">1</div>
-            <div class="todo-nr">0</div>
-        </div>
-        <div class="day-red-day col">sveriges nationaldag</div>
-     </div>
-</div>
+<template id="daycontanertemp">
+        <div class="daycontaner">
+            <div class="row">
+                <div class="col">
+                    <div class="day-Nr ">1</div>
+                    <div class="todo-nr circle d-inline-flex flex justify-content-center align-items-center">0</div>
+                </div>
+                <div class="day-red-day col">sveriges nationaldag</div>
+            </div>
+    </template>
 */
 function buildADay(dayinfo) {
   const datum = dayinfo.datum.split("-");
