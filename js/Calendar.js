@@ -41,33 +41,45 @@ function clearCalendar() {
 function buildADay(dayinfo) {
   const datum = dayinfo.datum.split("-");
 
+  // get the a copy of the element of a daycontaner
   const daycontaner = document
     .querySelector("#daycontanertemp")
     .content.cloneNode(true)
     .querySelector(".daycontaner");
 
+  // check if we have Selekted this this day
   if (state.cutentSelektedDay === dayinfo["datum"]) {
     daycontaner.classList.add("selected");
   }
+  //write the day nr
   setTextOnComponent(daycontaner, ".day-Nr", datum[datum.length - 1]);
 
-  setTextOnComponent(
-    daycontaner,
-    ".todo-nr",
-    getTodosByDate(new Date(dayinfo.datum))?.length || 0
-  );
+  //get how many todo on this day
+  const todoNr = getTodosByDate(new Date(dayinfo.datum))?.length || 0;
+  if (todoNr) {
+    //if we have todo we write it on the day
+    setTextOnComponent(daycontaner, ".todo-nr", todoNr);
+  } else {
+    //if we do not have todo we write delete the sub element
+    daycontaner.querySelector(".todo-nr").remove();
+  }
 
+  //set the datum in the data-calenderdate info
   daycontaner.dataset.calenderdate = dayinfo["datum"];
+
+  //check if it is red day and add the red on daycontaner if it is
   if (dayinfo["röd dag"] === "Ja") {
     daycontaner.classList.add("red");
   }
 
+  //check if this is a holy day
   if (dayinfo["helgdag"]) {
     setTextOnComponent(daycontaner, ".day-red-day", dayinfo["helgdag"]);
   } else {
     daycontaner.querySelector(".day-red-day").remove();
   }
 
+  //get calendar-Days so that I can add daycontaner on it
   const calendarDays = document.getElementById("calendar-Days");
   calendarDays.append(daycontaner);
 }
@@ -79,6 +91,7 @@ function setTextOnComponent(contaner, querySelector, text) {
 function createEmtyDay() {
   const emtyDay = document.createElement("div");
   emtyDay.classList.add("daycontaner");
+  
   const calendarDays = document.getElementById("calendar-Days");
   calendarDays.append(emtyDay);
 }
