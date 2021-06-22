@@ -37,7 +37,8 @@ function clearCalendar() {
                 </div>
                 <div class="day-red-day col">sveriges nationaldag</div>
             </div>
-    </template>
+        </div>
+</template>
 */
 function buildADay(dayinfo) {
   const datum = dayinfo.datum.split("-");
@@ -92,7 +93,7 @@ function setTextOnComponent(contaner, querySelector, text) {
 function createEmtyDay() {
   const emtyDay = document.createElement("div");
   emtyDay.classList.add("daycontaner");
-  
+
   const calendarDays = document.getElementById("calendar-Days");
   calendarDays.append(emtyDay);
 }
