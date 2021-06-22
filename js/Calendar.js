@@ -51,11 +51,12 @@ function buildADay(dayinfo) {
   }
   setTextOnComponent(daycontaner, ".day-Nr", datum[datum.length - 1]);
 
-  setTextOnComponent(
-    daycontaner,
-    ".todo-nr",
-    getTodosByDate(new Date(dayinfo.datum))?.length || 0
-  );
+  const todoNr = getTodosByDate(new Date(dayinfo.datum))?.length || 0;
+  if (todoNr) {
+    setTextOnComponent(daycontaner, ".todo-nr", todoNr);
+  } else {
+    daycontaner.querySelector(".todo-nr").remove();
+  }
 
   daycontaner.dataset.calenderdate = dayinfo["datum"];
   if (dayinfo["röd dag"] === "Ja") {
