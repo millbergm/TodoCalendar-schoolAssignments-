@@ -1,28 +1,6 @@
-var allTodos = new Array();
-
 function initTodo() {
   fetchDataFromLocalStorage();
   populateTodoContainer();
-}
-
-function fetchDataFromLocalStorage() {
-  const todoString = localStorage.getItem("allTodos");
-  const nextIdString = localStorage.getItem("nextId");
-  nextId = JSON.parse(nextIdString);
-  try {
-    allTodos = JSON.parse(todoString).map((todo) => {
-      return new TodoItem(
-        todo.id,
-        todo.title,
-        todo.info,
-        todo.startDate,
-        todo.stopDate,
-        todo.isDone
-      );
-    });
-  } catch (error) {
-    console.error("The local storage is empty, create a new todo.", error);
-  }
 }
 
 class TodoItem {
@@ -40,10 +18,55 @@ class TodoItem {
   }
 }
 
-var nextId = 1;
-
 function incrementId() {
-  return nextId++;
+  return state.nextId++;
+}
+
+function fetchDataFromLocalStorage() {
+  const todoString = localStorage.getItem("allTodos");
+  const nextIdString = localStorage.getItem("nextId");
+  state.nextId = JSON.parse(nextIdString);
+  try {
+    state.allTodos = JSON.parse(todoString).map((todo) => {
+      return new TodoItem(
+        todo.id,
+        todo.title,
+        todo.info,
+        todo.startDate,
+        todo.stopDate,
+        todo.isDone
+      );
+    });
+  } catch (error) {
+    console.error("The local storage is empty, create a new todo.", error);
+  }
+}
+
+function saveDataToLocalStorage() {
+  localStorage.setItem("allTodos", JSON.stringify(state.allTodos));
+  localStorage.setItem("nextId", JSON.stringify(state.nextId));
+}
+
+function deleteTodoById(id) {
+  let indexToRemove = state.allTodos.findIndex(obj => obj.id === id);
+  indexToRemove !== -1 ? state.allTodos.splice(indexToRemove, 1) : console.error("Index doesn't exist.");
+  saveDataToLocalStorage();
+  reloadContent();
+}
+
+function toggleStatusOfTodo(id) {
+  let indexToToggle = state.allTodos.findIndex(obj => obj.id === id);
+  if (indexToToggle !== -1 && state.allTodos[indexToToggle].isDone === false) {
+    state.allTodos[indexToToggle].isDone = true;
+  }
+  else if (indexToToggle !== -1 && state.allTodos[indexToToggle].isDone === true) {
+    state.allTodos[indexToToggle].isDone = false;
+  }
+  else {
+    console.error("Index is not available.");
+  }
+
+  saveDataToLocalStorage();
 }
 
 function addFormEventListener() {
@@ -60,17 +83,23 @@ function addFormEventListener() {
   editInputStartDate.addEventListener("input", checkValidDateOnEdit);
 }
 
+function calcYesterday() {
+  var today = new Date();
+  var yesterday = today.setDate(today.getDate() - 1);
+  return yesterday;
+}
+
 /**
  * @param {Event} event
  */
-function checkValidDate(event){
+function checkValidDate(event) {
   event.target.valueAsDate;
 
   var yesterday = new Date(calcYesterday);
 
   if (event.target.valueAsDate < yesterday) {
     console.log("invalid date")
-    
+
     let form = document.getElementById("newTodoForm");
     form.classList.add("needs-validation", "was-validated")
   }
@@ -79,43 +108,17 @@ function checkValidDate(event){
 /**
  * @param {Event} event
  */
- function checkValidDateOnEdit(event){
+function checkValidDateOnEdit(event) {
   event.target.valueAsDate;
 
   var yesterday = new Date(calcYesterday);
 
   if (event.target.valueAsDate < yesterday) {
     console.log("invalid date")
-    
+
     let form = document.getElementById("editTodoForm");
     form.classList.add("needs-validation", "was-validated")
   }
-}
-
-function addNewTodo(TodoItem) {
-  allTodos.push(TodoItem);
-}
-
-function deleteTodoById(id) {
-    let indexToRemove = allTodos.findIndex(obj => obj.id === id);
-    indexToRemove !== -1 ? allTodos.splice(indexToRemove, 1) : console.error("Index doesn't exist.");
-    saveDataToLocalStorage();
-    reloadContent();
-}
-
-function toggleStatusOfTodo(id) {
-  let indexToToggle = allTodos.findIndex(obj => obj.id === id);
-  if (indexToToggle !== -1 && allTodos[indexToToggle].isDone === false) {
-    allTodos[indexToToggle].isDone = true;
-  }
-  else if (indexToToggle !== -1 && allTodos[indexToToggle].isDone === true) {
-    allTodos[indexToToggle].isDone = false;
-  }
-  else {
-    console.error("Index is not available.");
-  }
-
-  saveDataToLocalStorage();
 }
 
 /**
@@ -126,7 +129,7 @@ function toggleStatusOfTodo(id) {
 function getTodosByDate(date) {
   let todosByDate = [];
 
-  todosByDate = allTodos.filter((TodoItem) => {
+  todosByDate = state.allTodos.filter((TodoItem) => {
     if (getFullDate(TodoItem.startDate) === getFullDate(date)) {
       return true;
     } else if (TodoItem.startDate < date && TodoItem.stopDate > date) {
@@ -150,7 +153,7 @@ function getFullDate(date) {
 }
 
 function getAllTodos() {
-  return allTodos;
+  return state.allTodos;
 }
 
 /**
@@ -196,6 +199,27 @@ function populateTodoContainer(date) {
   }
 }
 
+function setId(todotemp, id) {
+  const headingId = "headingId" + id;
+  const collapseId = "collapseId" + id;
+  const AccordionId = "AccordionId" + id;
+
+  const todoAccordion = todotemp.querySelector("#todoAccordion");
+  const headingOne = todotemp.querySelector("#headingOne");
+  const headingOneButton = headingOne.querySelector("button");
+  const collapseOne = todotemp.querySelector("#collapseOne");
+
+  todoAccordion.id = AccordionId;
+  headingOne.id = headingId;
+
+  headingOneButton.dataset.bsTarget = "#" + collapseId;
+  headingOneButton.setAttribute("aria-controls", collapseId);
+
+  collapseOne.id = collapseId;
+  collapseOne.setAttribute("aria-labelledby", headingId);
+  collapseOne.dataset.bsParent = "#" + AccordionId;
+}
+
 function todoDone(event) {
   const idOfSelectedTodo = event.currentTarget.dataset.id;
   toggleStatusOfTodo(parseInt(idOfSelectedTodo));
@@ -203,52 +227,26 @@ function todoDone(event) {
 
 function todoEdit(event) {
   const id = event.currentTarget.dataset.id;
-  const index = allTodos.findIndex(obj => obj.id === parseInt(id));
-  var todo = allTodos[index];
-  
+  const index = state.allTodos.findIndex(obj => obj.id === parseInt(id));
+  var todo = state.allTodos[index];
+
   document.forms["editTodoForm"].elements["todoId"].value = todo.id;
   document.forms["editTodoForm"].elements["editTodoTitle"].value = todo.title;
   document.forms["editTodoForm"].elements["editTodoInfo"].value = todo.info;
   document.forms["editTodoForm"].elements["editStartDate"].valueAsDate = new Date(todo.startDate);
   document.forms["editTodoForm"].elements["editStopDate"].valueAsDate = new Date(todo.stopDate);
-  document.forms["editTodoForm"].elements["toggleIsDone"].checked = todo.isDone;  
+  document.forms["editTodoForm"].elements["toggleIsDone"].checked = todo.isDone;
 }
 
 function todoDelete(event) {
-    const idOfSelectedTodo = event.currentTarget.dataset.id;
-    deleteTodoById(parseInt(idOfSelectedTodo));
-}
-
-function setId(todotemp, id) {
-  const headingId = "headingId" + id;
-  const collapseId = "collapseId" + id;
-  const AccordionId = "AccordionId" + id;
-  
-  const todoAccordion = todotemp.querySelector("#todoAccordion");
-  const headingOne = todotemp.querySelector("#headingOne");
-  const headingOneButton = headingOne.querySelector("button");
-  const collapseOne = todotemp.querySelector("#collapseOne");
-  
-  todoAccordion.id = AccordionId;
-  headingOne.id = headingId;
-  
-  headingOneButton.dataset.bsTarget = "#" + collapseId;
-  headingOneButton.setAttribute("aria-controls", collapseId);
-  
-  collapseOne.id = collapseId;
-  collapseOne.setAttribute("aria-labelledby", headingId);
-  collapseOne.dataset.bsParent = "#" + AccordionId;
-}
-
-function saveDataToLocalStorage() {
-  localStorage.setItem("allTodos", JSON.stringify(allTodos));
-  localStorage.setItem("nextId", JSON.stringify(nextId));
+  const idOfSelectedTodo = event.currentTarget.dataset.id;
+  deleteTodoById(parseInt(idOfSelectedTodo));
 }
 
 /**
  * @param {Event} event
  */
-function handleEditFormSubmit(event){
+function handleEditFormSubmit(event) {
   event.preventDefault();
 
   const todoId = document.getElementById("todoId").value;
@@ -258,10 +256,10 @@ function handleEditFormSubmit(event){
   var stopDate = new Date(document.getElementById("editStopDate").value);
   const isDone = document.getElementById("toggleIsDone").checked;
 
-  const index = allTodos.findIndex(obj => obj.id === parseInt(todoId));
-  var todo = allTodos[index];
-  
-  if (document.getElementById("editStartDate").valueAsDate > document.getElementById("editStopDate").valueAsDate) {    
+  const index = state.allTodos.findIndex(obj => obj.id === parseInt(todoId));
+  var todo = state.allTodos[index];
+
+  if (document.getElementById("editStartDate").valueAsDate > document.getElementById("editStopDate").valueAsDate) {
     stopDate = new Date(document.getElementById("editStartDate").value);
   }
   if (!Date.parse(stopDate)) {
@@ -294,7 +292,7 @@ function handleFormSubmit(event) {
   var startDate = new Date(document.getElementById("startDate").value);
   var stopDate = new Date(document.getElementById("stopDate").value);
 
-  if (startDate > stopDate) {    
+  if (startDate > stopDate) {
     stopDate = new Date(document.getElementById("startDate").value);
   }
   if (!Date.parse(stopDate)) {
@@ -303,7 +301,7 @@ function handleFormSubmit(event) {
 
   var yesterday = new Date(calcYesterday());
 
-  if (document.getElementById("startDate").valueAsDate > yesterday) {    
+  if (document.getElementById("startDate").valueAsDate > yesterday) {
     var todoItem = new TodoItem(
       0,
       todoTitle.value,
@@ -313,19 +311,13 @@ function handleFormSubmit(event) {
       false
     );
 
-    allTodos.push(todoItem);
+    state.allTodos.push(todoItem);
     saveDataToLocalStorage();
   }
   todoTitle.value = "";
   todoInfo.value = "";
   document.getElementById("startDate").value = "";
   document.getElementById("stopDate").value = "";
-  
-  reloadContent();
-}
 
-function calcYesterday() {
-  var today = new Date();
-  var yesterday = today.setDate(today.getDate() - 1);
-  return yesterday;
+  reloadContent();
 }
