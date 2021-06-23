@@ -48,21 +48,24 @@ function saveDataToLocalStorage() {
 }
 
 function deleteTodoById(id) {
-  let indexToRemove = state.allTodos.findIndex(obj => obj.id === id);
-  indexToRemove !== -1 ? state.allTodos.splice(indexToRemove, 1) : console.error("Index doesn't exist.");
+  let indexToRemove = state.allTodos.findIndex((obj) => obj.id === id);
+  indexToRemove !== -1
+    ? state.allTodos.splice(indexToRemove, 1)
+    : console.error("Index doesn't exist.");
   saveDataToLocalStorage();
   reloadContent();
 }
 
 function toggleStatusOfTodo(id) {
-  let indexToToggle = state.allTodos.findIndex(obj => obj.id === id);
+  let indexToToggle = state.allTodos.findIndex((obj) => obj.id === id);
   if (indexToToggle !== -1 && state.allTodos[indexToToggle].isDone === false) {
     state.allTodos[indexToToggle].isDone = true;
-  }
-  else if (indexToToggle !== -1 && state.allTodos[indexToToggle].isDone === true) {
+  } else if (
+    indexToToggle !== -1 &&
+    state.allTodos[indexToToggle].isDone === true
+  ) {
     state.allTodos[indexToToggle].isDone = false;
-  }
-  else {
+  } else {
     console.error("Index is not available.");
   }
 
@@ -98,10 +101,10 @@ function checkValidDate(event) {
   var yesterday = new Date(calcYesterday);
 
   if (event.target.valueAsDate < yesterday) {
-    console.log("invalid date")
+    console.log("invalid date");
 
     let form = document.getElementById("newTodoForm");
-    form.classList.add("needs-validation", "was-validated")
+    form.classList.add("needs-validation", "was-validated");
   }
 }
 
@@ -114,10 +117,10 @@ function checkValidDateOnEdit(event) {
   var yesterday = new Date(calcYesterday);
 
   if (event.target.valueAsDate < yesterday) {
-    console.log("invalid date")
+    console.log("invalid date");
 
     let form = document.getElementById("editTodoForm");
-    form.classList.add("needs-validation", "was-validated")
+    form.classList.add("needs-validation", "was-validated");
   }
 }
 
@@ -183,8 +186,10 @@ function populateTodoContainer(date) {
     todoitem.classList.remove("temp");
     todoitem.querySelector(".accordion-header p").innerHTML = todo.title;
     todoitem.querySelector(".todoInfo").innerHTML = todo.info;
-    todoitem.querySelector(".todoStartDate").innerHTML = todo.startDate.toDateString();
-    todoitem.querySelector(".todoEndDate").innerHTML = todo.stopDate.toDateString();
+    todoitem.querySelector(".todoStartDate").innerHTML =
+      todo.startDate.toDateString();
+    todoitem.querySelector(".todoEndDate").innerHTML =
+      todo.stopDate.toDateString();
     todoitem.querySelector(".todoDone").checked = todo.isDone;
 
     todoitem.querySelector(".todoDone").dataset.id = todo.id;
@@ -227,14 +232,16 @@ function todoDone(event) {
 
 function todoEdit(event) {
   const id = event.currentTarget.dataset.id;
-  const index = state.allTodos.findIndex(obj => obj.id === parseInt(id));
+  const index = state.allTodos.findIndex((obj) => obj.id === parseInt(id));
   var todo = state.allTodos[index];
 
   document.forms["editTodoForm"].elements["todoId"].value = todo.id;
   document.forms["editTodoForm"].elements["editTodoTitle"].value = todo.title;
   document.forms["editTodoForm"].elements["editTodoInfo"].value = todo.info;
-  document.forms["editTodoForm"].elements["editStartDate"].valueAsDate = new Date(todo.startDate);
-  document.forms["editTodoForm"].elements["editStopDate"].valueAsDate = new Date(todo.stopDate);
+  document.forms["editTodoForm"].elements["editStartDate"].valueAsDate =
+    new Date(todo.startDate);
+  document.forms["editTodoForm"].elements["editStopDate"].valueAsDate =
+    new Date(todo.stopDate);
   document.forms["editTodoForm"].elements["toggleIsDone"].checked = todo.isDone;
 }
 
@@ -256,10 +263,13 @@ function handleEditFormSubmit(event) {
   var stopDate = new Date(document.getElementById("editStopDate").value);
   const isDone = document.getElementById("toggleIsDone").checked;
 
-  const index = state.allTodos.findIndex(obj => obj.id === parseInt(todoId));
+  const index = state.allTodos.findIndex((obj) => obj.id === parseInt(todoId));
   var todo = state.allTodos[index];
 
-  if (document.getElementById("editStartDate").valueAsDate > document.getElementById("editStopDate").valueAsDate) {
+  if (
+    document.getElementById("editStartDate").valueAsDate >
+    document.getElementById("editStopDate").valueAsDate
+  ) {
     stopDate = new Date(document.getElementById("editStartDate").value);
   }
   if (!Date.parse(stopDate)) {
@@ -269,7 +279,6 @@ function handleEditFormSubmit(event) {
   var yesterday = new Date(calcYesterday());
 
   if (document.getElementById("editStartDate").valueAsDate > yesterday) {
-
     todo.title = todoTitle;
     todo.info = todoInfo;
     todo.startDate = startDate;
@@ -279,7 +288,7 @@ function handleEditFormSubmit(event) {
     saveDataToLocalStorage();
   }
 
-  reloadContent()
+  reloadContent();
 }
 
 /**
