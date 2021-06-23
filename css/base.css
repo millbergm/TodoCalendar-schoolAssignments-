@@ -20,6 +20,9 @@ body {
 .circle {
   border-radius: 50%;
 }
+.topp-z {
+  z-index: 999;
+}
 
 .padding-0 {
   padding-right: 0;
