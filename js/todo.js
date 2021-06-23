@@ -264,7 +264,9 @@ function handleEditFormSubmit(event){
     stopDate = new Date(document.getElementById("editStartDate").value);
   }
 
-  if (document.getElementById("editStartDate").valueAsDate >= new Date()) {
+  var yesterday = new Date(calcYesterday());
+
+  if (document.getElementById("editStartDate").valueAsDate > yesterday) {
 
     todo.title = todoTitle;
     todo.info = todoInfo;
@@ -295,7 +297,9 @@ function handleFormSubmit(event) {
     stopDate = new Date(document.getElementById("startDate").value);
   }
 
-  if (document.getElementById("startDate").valueAsDate >= new Date()) {    
+  var yesterday = new Date(calcYesterday());
+
+  if (document.getElementById("startDate").valueAsDate > yesterday) {    
     var todoItem = new TodoItem(
       0,
       todoTitle.value,
@@ -313,5 +317,11 @@ function handleFormSubmit(event) {
   document.getElementById("startDate").value = "";
   document.getElementById("stopDate").value = "";
   
-  reloadContent()
+  reloadContent();
+}
+
+function calcYesterday() {
+  var today = new Date();
+  var yesterday = today.setDate(today.getDate() - 1);
+  return yesterday;
 }
