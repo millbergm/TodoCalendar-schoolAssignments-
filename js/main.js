@@ -3,6 +3,8 @@ window.addEventListener("DOMContentLoaded", main);
 const state = {
   currentDate: new Date(),
   cutentSelektedDay: null,
+  nextId: 1,
+  allTodos: new Array()
 };
 
 function main() {
