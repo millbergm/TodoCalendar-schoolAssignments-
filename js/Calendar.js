@@ -44,18 +44,48 @@ function buildADay(dayinfo) {
   const datum = dayinfo.datum.split("-");
 
   // get the a copy of the element of a daycontaner
-  const daycontaner = document
+  const daycontaner = copydaycontaner();
+
+  setCalenderBaseDate(daycontaner, dayinfo);
+  SetCalenderText(daycontaner, dayinfo, datum);
+
+  //get calendar-Days so that I can add daycontaner on it
+  const calendarDays = document.getElementById("calendar-Days");
+  calendarDays.append(daycontaner);
+}
+
+function copydaycontaner() {
+  return document
     .querySelector("#daycontanertemp")
     .content.cloneNode(true)
     .querySelector(".daycontaner");
+}
 
+function setCalenderBaseDate(daycontaner, dayinfo) {
   // check if we have Selekted this this day
   if (state.cutentSelektedDay === dayinfo["datum"]) {
     daycontaner.classList.add("selected");
   }
+
+  //check if it is red day and add the red on daycontaner if it is
+  if (dayinfo["röd dag"] === "Ja") {
+    daycontaner.classList.add("red");
+  }
+
+  //set the datum in the data-calenderdate info
+  daycontaner.dataset.calenderdate = dayinfo["datum"];
+}
+
+function SetCalenderText(daycontaner, dayinfo, datum) {
   //write the day nr
   setTextOnComponent(daycontaner, ".day-Nr", datum[datum.length - 1]);
 
+  SetTodoInCalender(daycontaner, dayinfo);
+
+  SetHolyDayInCalender(daycontaner, dayinfo);
+}
+
+function SetTodoInCalender(daycontaner, dayinfo) {
   //get how many todo on this day
   const todoNr = getTodosByDate(new Date(dayinfo.datum))?.length || 0;
   if (todoNr) {
@@ -65,25 +95,15 @@ function buildADay(dayinfo) {
     //if we do not have todo we write delete the sub element
     daycontaner.querySelector(".todo-nr").remove();
   }
+}
 
-  //set the datum in the data-calenderdate info
-  daycontaner.dataset.calenderdate = dayinfo["datum"];
-
-  //check if it is red day and add the red on daycontaner if it is
-  if (dayinfo["röd dag"] === "Ja") {
-    daycontaner.classList.add("red");
-  }
-
+function SetHolyDayInCalender(daycontaner, dayinfo) {
   //check if this is a holy day
   if (dayinfo["helgdag"]) {
     setTextOnComponent(daycontaner, ".day-red-day", dayinfo["helgdag"]);
   } else {
     daycontaner.querySelector(".day-red-day").remove();
   }
-
-  //get calendar-Days so that I can add daycontaner on it
-  const calendarDays = document.getElementById("calendar-Days");
-  calendarDays.append(daycontaner);
 }
 
 function setTextOnComponent(contaner, querySelector, text) {
