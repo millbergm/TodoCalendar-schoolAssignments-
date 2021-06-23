@@ -66,7 +66,9 @@ function addFormEventListener() {
 function checkValidDate(event){
   event.target.valueAsDate;
 
-  if (event.target.valueAsDate < new Date()) {
+  var yesterday = new Date(calcYesterday);
+
+  if (event.target.valueAsDate < yesterday) {
     console.log("invalid date")
     
     let form = document.getElementById("newTodoForm");
@@ -80,7 +82,9 @@ function checkValidDate(event){
  function checkValidDateOnEdit(event){
   event.target.valueAsDate;
 
-  if (event.target.valueAsDate < new Date()) {
+  var yesterday = new Date(calcYesterday);
+
+  if (event.target.valueAsDate < yesterday) {
     console.log("invalid date")
     
     let form = document.getElementById("editTodoForm");
