@@ -264,7 +264,9 @@ function handleEditFormSubmit(event){
     stopDate = new Date(document.getElementById("editStartDate").value);
   }
 
-  if (document.getElementById("editStartDate").valueAsDate >= new Date()) {
+  var yesterday = new Date(calcYesterday());
+
+  if (document.getElementById("editStartDate").valueAsDate > yesterday) {
 
     todo.title = todoTitle;
     todo.info = todoInfo;
@@ -315,7 +317,7 @@ function handleFormSubmit(event) {
   document.getElementById("startDate").value = "";
   document.getElementById("stopDate").value = "";
   
-  reloadContent()
+  reloadContent();
 }
 
 function calcYesterday() {
