@@ -3,13 +3,14 @@ function initTodo() {
   populateTodoContainer();
 }
 
+// Every todo is a TodoItem object based on this class.
 class TodoItem {
   /**
    * @param {Date} startDate
    * @param {Date} stopDate
    */
   constructor(id, title, info, startDate, stopDate, isDone) {
-    this.id = id || incrementId();
+    this.id = id || incrementId();      // If id exists (parameters) use that value or we'll use the value returned from incrementId().
     this.title = title;
     this.info = info;
     this.startDate = new Date(startDate);
@@ -18,10 +19,12 @@ class TodoItem {
   }
 }
 
+// Returns nextId from the state in main.js. Used in a TodoItem.
 function incrementId() {
   return state.nextId++;
 }
 
+// Fetches "allTodos" and "nextId" from local storage and stores them in state.allTodos array and state.nextId.
 function fetchDataFromLocalStorage() {
   const todoString = localStorage.getItem("allTodos");
   const nextIdString = localStorage.getItem("nextId");
@@ -47,15 +50,17 @@ function saveDataToLocalStorage() {
   localStorage.setItem("nextId", JSON.stringify(state.nextId));
 }
 
+// Deletes a TodoItem from the allTodos array based in the id of the TodoItem.
 function deleteTodoById(id) {
   let indexToRemove = state.allTodos.findIndex((obj) => obj.id === id);
   indexToRemove !== -1
     ? state.allTodos.splice(indexToRemove, 1)
     : console.error("Index doesn't exist.");
-  saveDataToLocalStorage();
-  reloadContent();
+  saveDataToLocalStorage();                 // Saves the new state of the "allTodos" array to local storage.
+  reloadContent();                          // Reloads the content on the page. See main.js.
 }
 
+// Changes the isDone bool for a TodoItem with a specific id in the array allTodos.
 function toggleStatusOfTodo(id) {
   let indexToToggle = state.allTodos.findIndex((obj) => obj.id === id);
   if (indexToToggle !== -1 && state.allTodos[indexToToggle].isDone === false) {
@@ -72,6 +77,8 @@ function toggleStatusOfTodo(id) {
   saveDataToLocalStorage();
 }
 
+// Event listeners for forms (modals). When creating or editing a todo.
+// When pressing submit and for checking which dates the user enters.
 function addFormEventListener() {
   let form = document.getElementById("newTodoForm");
   form.addEventListener("submit", handleFormSubmit);
@@ -86,6 +93,7 @@ function addFormEventListener() {
   editInputStartDate.addEventListener("input", checkValidDateOnEdit);
 }
 
+// Used inside forms (modals) for certain if-statements.
 function calcYesterday() {
   var today = new Date();
   var yesterday = today.setDate(today.getDate() - 1);
@@ -93,6 +101,7 @@ function calcYesterday() {
 }
 
 /**
+ * Error checking for date when creating a new todo.
  * @param {Event} event
  */
 function checkValidDate(event) {
@@ -109,6 +118,7 @@ function checkValidDate(event) {
 }
 
 /**
+ * Error checking for date when editing a todo.
  * @param {Event} event
  */
 function checkValidDateOnEdit(event) {
@@ -125,7 +135,7 @@ function checkValidDateOnEdit(event) {
 }
 
 /**
- *
+ * Returns an array with all elements from the array allTodos (see main.js) that matches a specific date.
  * @param {Date} date
  * @returns
  */
@@ -147,29 +157,32 @@ function getTodosByDate(date) {
   return todosByDate;
 }
 
+// Returns the date with special formatting since we only want to check year, month and day.
+// Only used in the function getTodosByDate.
 function getFullDate(date) {
-  var month = date.getMonth(); //months from 1-12
+  var month = date.getMonth();
   var day = date.getDate();
   var year = date.getFullYear();
 
   return year + "/" + month + "/" + day;
 }
 
+// Returns the whole array named allTodos.
 function getAllTodos() {
   return state.allTodos;
 }
 
 /**
- *
+ * Populates the div (see index.html) with the id "todocontainer" with todo items.
  * @param {Date} date
  * @returns
  */
 function populateTodoContainer(date) {
-  todotemp = document.querySelector("div.todoitem.temp").cloneNode(true);
+  todotemp = document.querySelector("div.todoitem.temp").cloneNode(true);           // Clones the "template" node.
 
   const todocontainer = document.getElementById("todocontainer");
-  todocontainer.innerHTML = "";
-  todocontainer.append(todotemp);
+  todocontainer.innerHTML = "";                                                     // Clears todocontainer (including the "temp" div).
+  todocontainer.append(todotemp);                                                   // Adds todotemp again (after clearing). Needed for running the function again.
 
   let todos = [];
   if (date) {
@@ -179,9 +192,9 @@ function populateTodoContainer(date) {
   }
 
   for (const todo of todos) {
-    todoitem = todotemp.cloneNode(true);
+    todoitem = todotemp.cloneNode(true);                                            // Clones the node "todotemp" so that the todocontainer can be populated with many todo items.
     setId(todoitem, todo.id);
-    todoitem.dataset.id = todo.id;
+    todoitem.dataset.id = todo.id;                                                  // This id is important. Used by buttons in a todo later.
 
     todoitem.classList.remove("temp");
     todoitem.querySelector(".accordion-header p").innerHTML = todo.title;
@@ -204,6 +217,8 @@ function populateTodoContainer(date) {
   }
 }
 
+// Gives unique names to certain attributes in certain elements for a specific todo. For collapse/expand to work.
+// Used by populateTodoContainer().
 function setId(todotemp, id) {
   const headingId = "headingId" + id;
   const collapseId = "collapseId" + id;
@@ -225,11 +240,13 @@ function setId(todotemp, id) {
   collapseOne.dataset.bsParent = "#" + AccordionId;
 }
 
+// When the toggle status button in a todo is pressed. The id from the data attribute is used as an argument in the function call below.
 function todoDone(event) {
   const idOfSelectedTodo = event.currentTarget.dataset.id;
   toggleStatusOfTodo(parseInt(idOfSelectedTodo));
 }
 
+// When the edit todo button is pressed.
 function todoEdit(event) {
   const id = event.currentTarget.dataset.id;
   const index = state.allTodos.findIndex((obj) => obj.id === parseInt(id));
@@ -245,16 +262,18 @@ function todoEdit(event) {
   document.forms["editTodoForm"].elements["toggleIsDone"].checked = todo.isDone;
 }
 
+// When the delete button is pressed.
 function todoDelete(event) {
   const idOfSelectedTodo = event.currentTarget.dataset.id;
   deleteTodoById(parseInt(idOfSelectedTodo));
 }
 
 /**
+ * Used when submitting the edit form.
  * @param {Event} event
  */
 function handleEditFormSubmit(event) {
-  event.preventDefault();
+  event.preventDefault();                               // Prevents default action; submitting form.
 
   const todoId = document.getElementById("todoId").value;
   const todoTitle = document.getElementById("editTodoTitle").value;
@@ -292,6 +311,7 @@ function handleEditFormSubmit(event) {
 }
 
 /**
+ * Used when submitting a new todo form.
  * @param {Event} event
  */
 function handleFormSubmit(event) {

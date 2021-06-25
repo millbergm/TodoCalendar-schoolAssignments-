@@ -1,5 +1,7 @@
 window.addEventListener("DOMContentLoaded", main);
 
+// Saves states. cutentSelektedDay is set in the calendar but used with reloadContent().
+// nextId and allTodos are used in the todo container.
 const state = {
   currentDate: new Date(),
   cutentSelektedDay: null,
@@ -16,6 +18,7 @@ function main() {
   addFormEventListener();
 }
 
+// Reloads the calendar and the todo container.
 function reloadContent() {
   setupCalender(
     state.currentDate.getFullYear(),
