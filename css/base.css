@@ -10,11 +10,9 @@ body {
 
 .add-todo {
   font-size: 36px;
-  position: fixed;
-  left: 30px;
-  bottom: 30px;
   height: 68px;
   width: 68px;
+  margin: .5rem;
 }
 
 .circle {
